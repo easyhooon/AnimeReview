@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "346671882792",
+    "project_id": "animereview-ab309",
+    "storage_bucket": "animereview-ab309.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:346671882792:android:c5703b77e40d76b32a0b1d",
+        "android_client_info": {
+          "package_name": "com.kenshi.animereview"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "346671882792-kl6rq0mh7jl6d4lhkuq9d8he5c018geu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kenshi.animereview",
+            "certificate_hash": "c7ef690eac5a3cef2b30aa9e0005a6fda15c9116"
+          }
+        },
+        {
+          "client_id": "346671882792-ih12v1vsr526p7f61e4edujgd6dotdur.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQYmxKDvcL0VkvFj_wy2F6RH1OVgvUI60"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "346671882792-ih12v1vsr526p7f61e4edujgd6dotdur.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

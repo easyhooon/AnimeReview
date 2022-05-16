@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AnimeReview</string>
+    <string name="title_home">홈</string>
+    <string name="title_review">리뷰</string>
 </resources>

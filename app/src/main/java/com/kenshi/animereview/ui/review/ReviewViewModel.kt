@@ -1,4 +1,6 @@
 package com.kenshi.animereview.ui.review
 
-class ReviewViewModel {
+import androidx.lifecycle.ViewModel
+
+class ReviewViewModel: ViewModel() {
 }

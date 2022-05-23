@@ -7,5 +7,6 @@ import com.kenshi.animereview.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment_register) {
+class RegisterReviewFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment_register) {
+
 }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="mock_anime"
+            type="com.kenshi.animereview.data.model.MockAnimeInfo" />
+
+    </data>
+
+    <com.jackandphantom.carouselrecyclerview.view.ReflectionViewContainer
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:reflect_relativeDepth="0.5"
+        android:orientation="vertical"
+        app:reflect_gap="0dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="160dp"
+            android:layout_height="240dp"
+            android:scaleType="fitXY"
+            imageUrl="@{mock_anime.posterImage.medium}" />
+    </com.jackandphantom.carouselrecyclerview.view.ReflectionViewContainer>
+</layout>

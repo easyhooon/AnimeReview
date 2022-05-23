@@ -8,7 +8,6 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.kenshi.animereview.databinding.ActivityMainBinding
-import com.kenshi.animereview.navigation.KeepStateNavigator
 import com.kenshi.animereview.ui.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,17 +22,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.findNavController()
 
-        // setup custom navigator
-        val navigator =
-            KeepStateNavigator(
-                this,
-                navHostFragment.childFragmentManager,
-                R.id.nav_host_fragment)
-
-        navController.navigatorProvider.addNavigator(navigator)
-
-        // set navigation graph
-        navController.setGraph(R.navigation.nav_graph)
 
 //        val appBarConfiguration = AppBarConfiguration(navController.graph)
 //        setupActionBarWithNavController(navController, appBarConfiguration)

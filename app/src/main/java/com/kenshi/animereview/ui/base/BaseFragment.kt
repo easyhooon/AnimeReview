@@ -37,6 +37,10 @@ abstract class BaseFragment<B : ViewDataBinding>(
         _binding = null
     }
 
+    protected inline fun bind(block: B.() -> Unit) {
+        binding.apply(block)
+    }
+
     protected fun showToast(msg: String) =
         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
 }

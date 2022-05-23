@@ -5,15 +5,25 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/navigation_home">
 
-    <keep_state_fragment
+    <fragment
         android:id="@+id/navigation_home"
-        android:name="com.kenshi.animereview.ui.home.HomeContainerFragment"
-        android:label="HomeContainerFragment"
-        tools:layout="@layout/fragment_home_container"/>
+        android:name="com.kenshi.animereview.ui.home.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_navigation_home_to_animeDetailFragment"
+            app:destination="@id/animeDetailFragment" />
+    </fragment>
 
-    <keep_state_fragment
+    <fragment
         android:id="@+id/navigation_review"
         android:name="com.kenshi.animereview.ui.review.ReviewFragment"
         android:label="ReviewFragment"
-        tools:layout="@layout/fragment_review"/>
+        tools:layout="@layout/fragment_review" />
+
+    <fragment
+        android:id="@+id/animeDetailFragment"
+        android:name="com.kenshi.animereview.ui.anime_detail.AnimeDetailFragment"
+        android:label="AnimeDetailFragment"
+        tools:layout="@layout/fragment_anime_detail"/>
 </navigation>

@@ -5,4 +5,5 @@
     <string name="description_home_recommend_anime_image">홈화면 추천 애니 이미지</string>
     <string name="search">검색</string>
     <string name="recommend_animation">지훈님을 위한 추천 애니메이션</string>
+    <string name="register_review">리뷰 작성</string>
 </resources>

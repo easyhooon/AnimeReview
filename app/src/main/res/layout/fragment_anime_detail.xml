@@ -1,15 +1,229 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
+        <import type="android.view.View"/>
+
+        <import type="android.text.TextUtils"/>
+
+        <variable
+            name="anime"
+            type="com.kenshi.animereview.data.model.AnimeInfo" />
+
+        <variable
+            name="vm"
+            type="com.kenshi.animereview.ui.anime_detail.AnimeDetailViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:elevation="0dp">
 
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/tb_anime_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:navigationIcon="@drawable/ic_back" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/iv_anime_cover_image"
+                    imageUrl="@{anime.attributes.PosterImage.medium}"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginHorizontal="32dp"
+                    tools:src="@drawable/ic_baseline_home_24"
+                    app:layout_constraintDimensionRatio="2:3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:shapeAppearanceOverlay="@style/RoundedBig" />
+                <!--    width 를 기준으로 1:1 비율-->
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/iv_rating_start"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:visibility="@{TextUtils.isEmpty(anime.attributes.averageRating) ? View.GONE :View.VISIBLE}"
+                    android:src="@drawable/ic_baseline_star_rate_24"
+                    app:layout_constraintStart_toStartOf="@id/iv_anime_cover_image"
+                    app:layout_constraintTop_toBottomOf="@id/iv_anime_cover_image" />
+
+                <TextView
+                    android:id="@+id/tv_anime_average_rating"
+                    style="@style/TextMedium.Purple.Bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:visibility="@{TextUtils.isEmpty(anime.attributes.averageRating) ? View.GONE :View.VISIBLE}"
+                    android:text="@{anime.attributes.averageRating}"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_rating_start"
+                    app:layout_constraintStart_toEndOf="@id/iv_rating_start"
+                    app:layout_constraintTop_toTopOf="@id/iv_rating_start"
+                    tools:text="83.2" />
+
+                <TextView
+                    android:id="@+id/tv_anime_title"
+                    style="@style/TextAppearance.AppCompat.Display1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="12dp"
+                    android:text="@{anime.attributes.canonicalTitle}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_anime_average_rating"
+                    tools:text="카우보이 비밥" />
+
+                <com.google.android.material.chip.Chip
+                    android:checkable="false"
+                    android:id="@+id/tv_anime_show_type"
+                    style="@style/TextMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:visibility="@{TextUtils.isEmpty(anime.attributes.showType) ? View.GONE :View.VISIBLE}"
+                    android:text="@{anime.attributes.showType}"
+                    app:layout_constraintStart_toStartOf="@id/tv_anime_title"
+                    app:layout_constraintTop_toBottomOf="@id/tv_anime_title"
+                    tools:text="TV" />
+
+                <com.google.android.material.chip.Chip
+                    android:checkable="false"
+                    android:id="@+id/tv_anime_age_rating_guide"
+                    style="@style/TextMedium"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:visibility="@{TextUtils.isEmpty(anime.attributes.ageRatingGuide) ? View.GONE :View.VISIBLE}"
+                    android:text="@{anime.attributes.ageRatingGuide}"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_anime_show_type"
+                    app:layout_constraintStart_toEndOf="@id/tv_anime_show_type"
+                    app:layout_constraintTop_toTopOf="@id/tv_anime_show_type"
+                    tools:text="7세 이상" />
+
+                <com.google.android.material.chip.Chip
+                    android:checkable="false"
+                    android:id="@+id/tv_anime_episode_count"
+                    style="@style/TextMedium"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:visibility="@{TextUtils.isEmpty(anime.attributes.episodeCount.toString()) ? View.GONE :View.VISIBLE}"
+                    app:episode="@{anime.attributes.episodeCount.toString()}"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_anime_age_rating_guide"
+                    app:layout_constraintStart_toEndOf="@id/tv_anime_age_rating_guide"
+                    app:layout_constraintTop_toTopOf="@id/tv_anime_age_rating_guide"
+                    tools:text="12화" />
+
+                <com.google.android.material.chip.Chip
+                    android:checkable="false"
+                    android:id="@+id/tv_anime_status"
+                    style="@style/TextMedium"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:visibility="@{TextUtils.isEmpty(anime.attributes.status) ? View.GONE :View.VISIBLE}"
+                    android:text="@{anime.attributes.status}"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_anime_age_rating_guide"
+                    app:layout_constraintStart_toEndOf="@id/tv_anime_episode_count"
+                    app:layout_constraintTop_toTopOf="@id/tv_anime_age_rating_guide"
+                    tools:text="방영중" />
+
+                <View
+                    android:id="@+id/view_divider_product"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="12dp"
+                    android:background="#eeeff1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_anime_age_rating_guide" />
+
+                <TextView
+                    android:id="@+id/tv_anime_synopsis"
+                    style="@style/TextSubtitle3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="12dp"
+                    android:visibility="@{TextUtils.isEmpty(anime.attributes.synopsis) ? View.GONE :View.VISIBLE}"
+                    app:text="@{anime.attributes.synopsis}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/view_divider_product" />
+
+                <!--                <androidx.recyclerview.widget.RecyclerView-->
+                <!--                    android:id="@+id/rv_anime_review"-->
+                <!--                    android:layout_width="0dp"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="24dp"-->
+                <!--                    android:layout_marginBottom="24dp"-->
+                <!--                    android:nestedScrollingEnabled="false"-->
+                <!--                    android:orientation="vertical"-->
+                <!--                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+                <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                    app:layout_constraintStart_toStartOf="parent"-->
+                <!--                    app:layout_constraintTop_toBottomOf="@id/tv_anime_synopsis" />-->
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_gravity="bottom"
+            android:visibility="gone"
+            android:background="@drawable/background_top_rounded">
+
+            <RatingBar
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:isIndicator="false"
+                android:numStars="5"
+                android:rating="0"
+                android:stepSize="20"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                style="@style/TextSubtitle1.Bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:text="@string/register_review"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
+
+    <!--그라데이션 배경을 지정하기 위해 AppCompatButton-->
+    <!--appbar layout elevation 0dp -> shadow 효과 사라짐-->

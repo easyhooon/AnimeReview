@@ -63,6 +63,7 @@ dependencies {
     //Coroutine
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:$coroutine_version"
 
     //Room
     implementation "androidx.room:room-runtime:$room_version"

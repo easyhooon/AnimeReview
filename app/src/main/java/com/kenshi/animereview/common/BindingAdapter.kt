@@ -1,11 +1,12 @@
 package com.kenshi.animereview.common
 
 import android.view.View
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.Toast
-import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.chip.Chip
 import com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
 import com.kenshi.animereview.GlideApp
 import com.kenshi.animereview.data.model.AnimeInfo
@@ -16,11 +17,11 @@ import com.kenshi.animereview.ui.home.MockAnimeAdapter
 import com.kenshi.animereview.ui.home.RecommendAnimeAdapter
 
 @BindingAdapter("imageUrl")
-fun AppCompatImageView.loadImage(imageUrl: String?) {
+fun ImageView.bindImage(imageUrl: String?) {
     if(!imageUrl.isNullOrEmpty()) {
         GlideApp.with(context)
             .load(imageUrl)
-            .centerCrop()
+            //.centerCrop()
             .into(this)
     }
 }
@@ -46,13 +47,6 @@ fun RecyclerView.bindMockAnimeList(animeList: MutableList<MockAnimeInfo>) {
     }
 }
 
-@BindingAdapter("itemDecoration")
-fun RecyclerView.bindItemDecoration(itemDecoration: RecyclerView.ItemDecoration) {
-    if (itemDecorationCount == 0) {
-        addItemDecoration(itemDecoration)
-    }
-}
-
 @BindingAdapter("animeAdapter")
 fun CarouselRecyclerview.bindAnimeAdapter(adapter: RecyclerView.Adapter<*>) {
     this.adapter = adapter
@@ -62,6 +56,14 @@ fun CarouselRecyclerview.bindAnimeAdapter(adapter: RecyclerView.Adapter<*>) {
 //    setFlat(false)
     setIntervalRatio(0.5f)
     isNestedScrollingEnabled = false
+}
+
+@BindingAdapter("skinItems")
+fun RecyclerView.bindRecommendAnimeList(animeList: List<AnimeInfo>?) {
+    val boundAdapter = this.adapter
+    if (boundAdapter is RecommendAnimeAdapter && !animeList.isNullOrEmpty()) {
+        boundAdapter.submitList(animeList)
+    }
 }
 
 @BindingAdapter("show")
@@ -76,8 +78,32 @@ fun View.bindToast(throwable: Throwable?) {
     }
 }
 
-//TODO 평점 카운트 ~8.9점
+//@BindingAdapter("tags")
+//fun ChipGroup.bindTags(tags: List<String>?) {
+//    tags?.forEach { tag ->
+//        val tagView: Chip = Chip(context).apply {
+//            text = tag
+//            isCheckable = false
+//            isCloseIconVisible = false
+//            setChipBackgroundColorResource(R.color.purple)
+//            setTextAppearanceResource(R.style.TextStyle_Tag)
+//        }
+//        addView(tagView)
+//    }
+//}
 
-//TODO 화수 카운트 ~화
+@BindingAdapter("tag")
+fun Chip.bindShow(text: String) {
+   visibility = if (text.isNotEmpty()) {
+       this.text = text
+       View.VISIBLE
+   } else
+       View.GONE
+}
 
-//TODO 연령 제한 ~세 이상
+@BindingAdapter("episode")
+fun Chip.countEpisode(count: String) {
+    if(this.text.isNotEmpty()) {
+        "$count episode".also { this.text = it }
+    }
+}

@@ -18,8 +18,8 @@
     <color name="anime_grey_08">#e9e9e9</color>
     <color name="anime_grey_09">#eeeff1</color>
     <color name="anime_bluegrey">#f2f4f6</color>
-    <color name="anime_white">#ffffff</color>
     <color name="anime_brown">#967a6d</color>
+    <color name="anime_white">#FFFFFFFF</color>
     <color name="anime_white_a90">#E6FFFFFF</color>
 
 

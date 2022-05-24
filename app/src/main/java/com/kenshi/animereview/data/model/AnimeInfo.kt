@@ -73,7 +73,7 @@ data class AnimeInfo(
     @SerializedName("id")
     val id: String?,
     @SerializedName("attributes")
-    val attributes: Attributes?,
+    val attributes: Attributes,
 ) : Parcelable {
 
     @Parcelize
@@ -92,10 +92,10 @@ data class AnimeInfo(
         val posterImage: PosterImage?,
         @SerializedName("synopsis")
         val synopsis: String?,
-        @SerializedName("episodeLength")
-        val episodeLength: Int?,
         @SerializedName("showType")
-        val showType: String?
+        val showType: String?,
+        @SerializedName("status")
+        val status: String?,
     ) : Parcelable {
 
         @Parcelize

@@ -12,7 +12,11 @@
             type="com.kenshi.animereview.ui.home.HomeViewModel" />
 
         <variable
-            name="adapter"
+            name="recommend_adapter"
+            type="com.kenshi.animereview.ui.home.RecommendAnimeAdapter" />
+
+        <variable
+            name="genre_adapter"
             type="com.kenshi.animereview.ui.home.RecommendAnimeAdapter" />
 
         <variable
@@ -74,17 +78,39 @@
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="지훈님을 위한 추천 애니메이션" />
 
+<!--                <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview-->
+<!--                    android:id="@+id/rv_recommend_anime"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="360dp"-->
+<!--                    android:layout_marginHorizontal="12dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    app:animeAdapter="@{mock_adapter}"-->
+<!--                    app:mockAnimeList="@{vm.mockAnimeList}"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/tv_home_title_recommend" />-->
+
                 <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
                     android:id="@+id/rv_recommend_anime"
                     android:layout_width="0dp"
                     android:layout_height="360dp"
                     android:layout_marginHorizontal="12dp"
                     android:layout_marginTop="16dp"
-                    app:animeAdapter="@{mock_adapter}"
-                    app:mockAnimeList="@{vm.mockAnimeList}"
+                    app:animeAdapter="@{recommend_adapter}"
+                    app:animeList="@{vm.animeListById}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_home_title_recommend" />
+
+                <ProgressBar
+                    android:id="@+id/recommend_loading_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@id/rv_recommend_anime"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/rv_recommend_anime"
+                    app:show="@{vm.animeListById}" />
 
                 <TextView
                     android:id="@+id/tv_home_title_adventure"
@@ -95,22 +121,34 @@
                     android:paddingStart="16dp"
                     android:paddingTop="24dp"
                     android:paddingEnd="16dp"
-                    android:text="장르별 애니메이션: 어드벤처"
+                    android:text="장르별 애니메이션 - 어드벤처"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/rv_recommend_anime" />
 
                 <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
-                    android:id="@+id/rv_adventure_anime"
+                    android:id="@+id/rv_genre_anime"
                     android:layout_width="0dp"
                     android:layout_height="360dp"
                     android:layout_marginHorizontal="12dp"
                     android:layout_marginTop="16dp"
-                    app:animeAdapter="@{adapter}"
-                    app:animeList="@{vm.uiState}"
+                    app:animeAdapter="@{genre_adapter}"
+                    app:animeList="@{vm.genreAnimeList}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_home_title_adventure" />
+
+<!--                같은 어댑터를 쓰면 안되나? 그런거같음..-->
+
+                <ProgressBar
+                    android:id="@+id/genre_loading_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@id/rv_genre_anime"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/rv_genre_anime"
+                    app:show="@{vm.genreAnimeList}" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

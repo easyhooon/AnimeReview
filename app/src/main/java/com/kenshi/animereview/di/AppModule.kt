@@ -1,7 +1,7 @@
 package com.kenshi.animereview.di
 
 import com.kenshi.animereview.data.remote.AnimeRepositoryImpl
-import com.kenshi.animereview.domain.Repository.AnimeRepository
+import com.kenshi.animereview.domain.repository.AnimeRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

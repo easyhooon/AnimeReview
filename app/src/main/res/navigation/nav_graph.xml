@@ -12,18 +12,27 @@
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_navigation_home_to_animeDetailFragment"
-            app:destination="@id/animeDetailFragment" />
+            app:destination="@id/navigation_anime_detail" />
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_review"
-        android:name="com.kenshi.animereview.ui.review.ReviewFragment"
+        android:id="@+id/navigation_my"
+        android:name="com.kenshi.animereview.ui.review.MyFragment"
         android:label="ReviewFragment"
-        tools:layout="@layout/fragment_review" />
+        tools:layout="@layout/fragment_my" />
 
     <fragment
-        android:id="@+id/animeDetailFragment"
+        android:id="@+id/navigation_anime_detail"
         android:name="com.kenshi.animereview.ui.anime_detail.AnimeDetailFragment"
         android:label="AnimeDetailFragment"
-        tools:layout="@layout/fragment_anime_detail"/>
+        tools:layout="@layout/fragment_anime_detail">
+        <action
+            android:id="@+id/action_animeDetailFragment_to_registerReviewFragment"
+            app:destination="@id/navigation_register_review" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_register_review"
+        android:name="com.kenshi.animereview.ui.register.RegisterReviewFragment"
+        android:label="RegisterReviewFragment"
+        tools:layout="@layout/fragment_register_review"/>
 </navigation>

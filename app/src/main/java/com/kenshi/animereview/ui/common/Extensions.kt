@@ -1,4 +1,4 @@
-package com.kenshi.animereview.common
+package com.kenshi.animereview.ui.common
 
 import android.content.Context
 import android.content.res.Resources

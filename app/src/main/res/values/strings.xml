@@ -6,4 +6,5 @@
     <string name="search">검색</string>
     <string name="recommend_animation">지훈님을 위한 추천 애니메이션</string>
     <string name="register_review">리뷰 작성</string>
+    <string name="rating">Rating</string>
 </resources>

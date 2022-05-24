@@ -1,4 +1,4 @@
-package com.kenshi.animereview.common
+package com.kenshi.animereview.ui.common
 
 import android.view.View
 import android.widget.ImageView
@@ -21,7 +21,6 @@ fun ImageView.bindImage(imageUrl: String?) {
     if(!imageUrl.isNullOrEmpty()) {
         GlideApp.with(context)
             .load(imageUrl)
-            //.centerCrop()
             .into(this)
     }
 }
@@ -103,7 +102,7 @@ fun Chip.bindShow(text: String) {
 
 @BindingAdapter("episode")
 fun Chip.countEpisode(count: String) {
-    if(this.text.isNotEmpty()) {
+    if(count.isNotEmpty()) {
         "$count episode".also { this.text = it }
     }
 }

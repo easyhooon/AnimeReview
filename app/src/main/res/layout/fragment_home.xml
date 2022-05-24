@@ -138,8 +138,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_home_title_adventure" />
 
-<!--                같은 어댑터를 쓰면 안되나? 그런거같음..-->
-
                 <ProgressBar
                     android:id="@+id/genre_loading_bar"
                     android:layout_width="wrap_content"

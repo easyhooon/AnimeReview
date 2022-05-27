@@ -38,6 +38,8 @@ fun RecyclerView.bindAnimeList(animeList: UiState<List<AnimeInfo>>) {
     }
 }
 
+
+
 @BindingAdapter("mockAnimeList")
 fun RecyclerView.bindMockAnimeList(animeList: MutableList<MockAnimeInfo>) {
     val boundAdapter = this.adapter

@@ -67,13 +67,12 @@ import kotlinx.parcelize.Parcelize
 //    }
 //}
 
-
 @Parcelize
 data class AnimeInfo(
     @SerializedName("id")
-    val id: String?,
+    val id: String? = null,
     @SerializedName("attributes")
-    val attributes: Attributes,
+    val attributes: Attributes? = null,
 ) : Parcelable {
 
     @Parcelize
@@ -102,24 +101,24 @@ data class AnimeInfo(
         data class CoverImage(
             @SerializedName("large")
             val large: String?,
-            @SerializedName("original")
-            val original: String?,
             @SerializedName("small")
             val small: String?,
-            @SerializedName("tiny")
-            val tiny: String?
         ) : Parcelable
 
         @Parcelize
         data class PosterImage(
-            @SerializedName("tiny")
-            val tiny: String?,
             @SerializedName("large")
             val large: String?,
             @SerializedName("small")
             val small: String?,
             @SerializedName("medium")
             val medium: String?,
+            @SerializedName("original")
+            val original: String?
         ) : Parcelable
+    }
+
+    companion object {
+        val EMPTY = AnimeInfo()
     }
 }

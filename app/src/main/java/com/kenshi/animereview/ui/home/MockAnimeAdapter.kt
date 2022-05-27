@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kenshi.animereview.R
 import com.kenshi.animereview.data.model.MockAnimeInfo
 import com.kenshi.animereview.databinding.ItemMockAnimeBinding
-import com.kenshi.animereview.databinding.ItemRecommendAnimeBinding
 
 class MockAnimeAdapter(
     private val whenItemClicked: (MockAnimeInfo) -> Unit

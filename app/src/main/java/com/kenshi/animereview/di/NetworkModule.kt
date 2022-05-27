@@ -3,6 +3,8 @@ package com.kenshi.animereview.di
 import com.kenshi.animereview.BuildConfig
 import com.kenshi.animereview.data.network.RequestDebugInterceptor
 import com.kenshi.animereview.data.network.service.AnimeService
+import com.kenshi.animereview.data.network.service.FirebaseReviewService
+import com.kenshi.animereview.data.network.service.FirebaseUserService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -72,4 +74,16 @@ object NetworkModule {
     fun provideAnimeService(retrofit: Retrofit): AnimeService {
         return retrofit.create(AnimeService::class.java)
     }
+
+//    @Provides
+//    @Singleton
+//    fun provideFirebaseReviewService(): FirebaseReviewService {
+//        return
+//    }
+
+//    @Provides
+//    @Singleton
+//    fun provideFirebaseUserService(): FirebaseUserService {
+//        return
+//    }
 }

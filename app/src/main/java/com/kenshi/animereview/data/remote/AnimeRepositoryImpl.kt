@@ -4,8 +4,8 @@ import com.kenshi.animereview.data.model.AnimeInfo
 import com.kenshi.animereview.data.network.service.AnimeService
 import com.kenshi.animereview.domain.repository.AnimeRepository
 import com.kenshi.animereview.ui.base.UiState
-import com.ready.lolchamps.exceptions.EmptyBodyException
-import com.ready.lolchamps.exceptions.NetworkFailureException
+import com.kenshi.animereview.exceptions.EmptyBodyException
+import com.kenshi.animereview.exceptions.NetworkFailureException
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.Flow
@@ -20,21 +20,54 @@ class AnimeRepositoryImpl @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher,
 ) : AnimeRepository {
 
-    // 자동 추천 api 가 없으므로 임의의 애니메이션을 선택하여 골라 list 에 담아서 emit 하는 방식 선택
+    // 맞춤 추천 api 가 없으므로 임의의 애니메이션을 선택하여 골라 list 에 담아서 emit 하는 방식 선택
     // 순서대로 카우보이 비밥, 스파이 패밀리, 진격의 거인, 귀멸의 칼날, 슈타인즈게이트, 카구야, 비스타즈, 비스크돌, 86, 좀비랜드 사가
     private val recommendAnimeIdList: MutableList<String> = mutableListOf(
         "1", "45398", "7442", "41370", "5646", "41373", "42147", "44382", "42147", "41459"
     )
 
+    //TODO 효율적으로 호출 방법으로 개선                                                                                   ㄴㄴ
     override fun fetchAnimeListById(): Flow<UiState<List<AnimeInfo>>> =
         flow<UiState<List<AnimeInfo>>> {
-            val recommendAnimeList: MutableList<AnimeInfo> = mutableListOf()
+            var recommendAnimeList: MutableList<AnimeInfo> = mutableListOf()
+//            for(id in recommendAnimeIdList) {
+//                val response = animeService.fetchAnimeById(id)
+//                response.body()?.let { recommendAnimeList.add(it.Anime) }
+//            }
+
+            //TODO 비동기 처리, Combine 연산자로 변경해볼 것
             withContext(ioDispatcher) {
-                for (id in recommendAnimeIdList) {
-                    val response = async { animeService.fetchAnimeById(id) }
-                    response.await().body()?.let { recommendAnimeList.add(it.Anime) }
-                }
+                val response1 = async { animeService.fetchAnimeById("1") }
+                val response2 = async {animeService.fetchAnimeById("45398") }
+                val response3 = async { animeService.fetchAnimeById("7442") }
+                val response4 = async { animeService.fetchAnimeById("41370") }
+                val response5 = async { animeService.fetchAnimeById("5646") }
+                val response6 = async { animeService.fetchAnimeById("41373") }
+                val response7 = async { animeService.fetchAnimeById("42147") }
+                val response8 = async { animeService.fetchAnimeById("44382") }
+                val response9 = async { animeService.fetchAnimeById("42147") }
+                val response10 = async { animeService.fetchAnimeById("41459") }
+
+                recommendAnimeList = mutableListOf(
+                    response1.await().body()!!.Anime,
+                    response2.await().body()!!.Anime,
+                    response3.await().body()!!.Anime,
+                    response4.await().body()!!.Anime,
+                    response5.await().body()!!.Anime,
+                    response6.await().body()!!.Anime,
+                    response7.await().body()!!.Anime,
+                    response8.await().body()!!.Anime,
+                    response9.await().body()!!.Anime,
+                    response10.await().body()!!.Anime,
+                )
             }
+
+//            withContext(ioDispatcher) {
+//                for (id in recommendAnimeIdList) {
+//                    val response = async { animeService.fetchAnimeById(id) }
+//                    response.await().body()?.let { recommendAnimeList.add(it.Anime) }
+//                }
+//            }
             Timber.tag("recommendAnimeList").d("$recommendAnimeList")
             emit(UiState.Success(recommendAnimeList))
         }.catch { emit(UiState.Error(it)) }
@@ -57,9 +90,9 @@ class AnimeRepositoryImpl @Inject constructor(
 
 
     // flow 는 coroutine 이므로 flow block 내부에서는 suspend 함수를 호출할 수 있다.
-    override fun fetchGenreAnime(value: String): Flow<UiState<List<AnimeInfo>>> =
+    override fun fetchCategoryAnime(category: String): Flow<UiState<List<AnimeInfo>>> =
         flow<UiState<List<AnimeInfo>>> {
-            val response = animeService.fetchGenreAnime(value)
+            val response = animeService.fetchCategoryAnime(category)
             if (response.isSuccessful) {
                 Timber.tag("response.body()").d("${response.body()}")
                 val animeList: List<AnimeInfo> =
@@ -72,4 +105,9 @@ class AnimeRepositoryImpl @Inject constructor(
                 throw NetworkFailureException("[${response.code()}] - ${response.raw()}")
             }
         }.catch { emit(UiState.Error(it)) }
+
+
+    override fun fetchSearchAnime(title: String): Flow<UiState<List<AnimeInfo>>> {
+        TODO("Not yet implemented")
+    }
 }

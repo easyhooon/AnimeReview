@@ -11,9 +11,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val animeRepository: AnimeRepository,
+    private val animeRepository: AnimeRepository
 ) : ViewModel() {
-
     val animeListById: StateFlow<UiState<List<AnimeInfo>>> = animeRepository.fetchAnimeListById()
         .stateIn(
             scope = viewModelScope,
@@ -21,7 +20,14 @@ class HomeViewModel @Inject constructor(
             initialValue = UiState.Loading
         )
 
-    val genreAnimeList: StateFlow<UiState<List<AnimeInfo>>> = animeRepository.fetchGenreAnime("adventure")
+    val genreAnimeList: StateFlow<UiState<List<AnimeInfo>>> = animeRepository.fetchCategoryAnime("adventure")
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000L),
+            initialValue = UiState.Loading
+        )
+
+    fun searchAnime(title: String): StateFlow<UiState<List<AnimeInfo>>> = animeRepository.fetchSearchAnime(title)
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000L),

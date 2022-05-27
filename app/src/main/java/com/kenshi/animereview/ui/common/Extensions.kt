@@ -1,5 +1,6 @@
 package com.kenshi.animereview.ui.common
 
+import android.app.Activity
 import android.content.Context
 import android.content.res.Resources
 import android.util.TypedValue
@@ -10,6 +11,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 fun View.showKeyboard(requestFocus: Boolean = false) {
@@ -40,3 +43,20 @@ inline fun Fragment.launchAndRepeatWithViewLifecycle(
         }
     }
 }
+
+fun <T> Fragment.collectLatestLifecycleFlow(flow: Flow<T>, collect: suspend (T) -> Unit) {
+    viewLifecycleOwner.lifecycleScope.launch {
+        repeatOnLifecycle(Lifecycle.State.STARTED) {
+            flow.collectLatest(collect)
+        }
+    }
+}
+
+//fun <T> Activity.collectLatestLifecycleFlow(flow: Flow<T>, collect: suspend (T) -> Unit) {
+//    this.lifecycleScope.launch {
+//        repeatOnLifecycle(Lifecycle.State.STARTED) {
+//            flow.collectLatest(collect)
+//        }
+//    }
+//}
+

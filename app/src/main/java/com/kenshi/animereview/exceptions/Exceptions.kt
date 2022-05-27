@@ -1,4 +1,4 @@
-package com.ready.lolchamps.exceptions
+package com.kenshi.animereview.exceptions
 
 
 class EmptyBodyException(message: String? = "") : Exception(message)

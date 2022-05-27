@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kenshi.animereview.R
 import com.kenshi.animereview.data.model.AnimeInfo
-import com.kenshi.animereview.databinding.ItemRecommendAnimeBinding
+import com.kenshi.animereview.databinding.ItemAnimeBinding
 
 class RecommendAnimeAdapter(
     private val whenItemClicked: (AnimeInfo) -> Unit
@@ -16,7 +16,7 @@ class RecommendAnimeAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecommendAnimeViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = DataBindingUtil.inflate<ItemRecommendAnimeBinding>(layoutInflater, R.layout.item_recommend_anime, parent, false)
+        val binding = DataBindingUtil.inflate<ItemAnimeBinding>(layoutInflater, R.layout.item_anime, parent, false)
         return RecommendAnimeViewHolder(binding).apply {
             binding.root.setOnClickListener {
                 val position = bindingAdapterPosition.takeIf { it != RecyclerView.NO_POSITION } ?: return@setOnClickListener
@@ -33,7 +33,7 @@ class RecommendAnimeAdapter(
     }
 
     class RecommendAnimeViewHolder(
-        private val binding: ItemRecommendAnimeBinding,
+        private val binding: ItemAnimeBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: AnimeInfo) {

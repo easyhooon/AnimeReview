@@ -9,5 +9,7 @@ interface AnimeRepository {
 
     fun fetchAnimeById(id: String): Flow<UiState<AnimeInfo>>
 
-    fun fetchGenreAnime(value: String): Flow<UiState<List<AnimeInfo>>>
+    fun fetchCategoryAnime(category: String): Flow<UiState<List<AnimeInfo>>>
+
+    fun fetchSearchAnime(title: String): Flow<UiState<List<AnimeInfo>>>
 }

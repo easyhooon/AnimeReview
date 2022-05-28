@@ -83,7 +83,7 @@ fun View.bindToast(throwable: Throwable?) {
 
 @BindingAdapter("rating")
 fun TextView.bindText(rating: String) {
-    val df = DecimalFormat("##0.0")
+    val df = DecimalFormat("##0.00")
     val starRating = rating.toFloat() / 20f
     this.text = df.format(starRating)
 }

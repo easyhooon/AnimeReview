@@ -17,7 +17,7 @@ class ReviewAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReviewViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = DataBindingUtil.inflate<ItemReviewBinding>(layoutInflater, R.layout.item_anime, parent, false)
+        val binding = DataBindingUtil.inflate<ItemReviewBinding>(layoutInflater, R.layout.item_recommend_anime, parent, false)
         return ReviewViewHolder(binding).apply {
             binding.root.setOnClickListener {
                 val position = bindingAdapterPosition.takeIf { it != RecyclerView.NO_POSITION } ?: return@setOnClickListener

@@ -56,15 +56,7 @@ class AnimeDetailFragment: BaseFragment<FragmentAnimeDetailBinding>(R.layout.fra
 
     private fun openRegisterReview() {
         viewModel.setAnimeInfo(animeInfo)
-        //viewModel.setAnimeId(animeInfo.id!!)
-        findNavController().navigate(
-            R.id.action_animeDetailFragment_to_registerReviewFragment, bundleOf(
-                // 이런식으로 전달을 하면 xml onClick 을 통한 saveReview 가 불가능하다
-                // 모든 데이터를 viewModel 에서 관리해야 뷰모델에서 바로 save 함수를 호출할 수 있다.
-                // 그래도 화면에 데이터 뿌리는 용으론 필요하다. 아닌가
-               // ANIME_INFO to animeInfo,
-            )
-        )
+        findNavController().navigate(R.id.action_animeDetailFragment_to_registerReviewFragment)
     }
 
     private fun initRatingBar() {

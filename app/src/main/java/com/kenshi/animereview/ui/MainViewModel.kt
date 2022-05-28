@@ -39,24 +39,23 @@ class MainViewModel : ViewModel() {
         firebaseAuth.currentUser!!
     }
 
-    private val _reviewText = MutableStateFlow<String>("")
-    val reviewText: StateFlow<String> = _reviewText.asStateFlow()
+    val reviewText = MutableLiveData<String>()
 
-    val inputText = MutableLiveData<String>()
 
     fun registerReview()  {
-        _reviewText.value = inputText.value.toString()
+        //_reviewText.value = inputText.value.toString()
 
         val ref = db.collection(REVIEW_PATH).document()
         val refId = ref.id
 
         val reviewInfo = Review(
             refId,
-            _animeId.value,
+            //_animeId.value,
+            _animeInfo.value.id,
             currentUser.uid,
             _rating.value.toString(),
-            //양방향 바인딩을 통해
-            _reviewText.value
+            //_reviewText.value
+            reviewText.value
         )
 
         ref.set(reviewInfo)
@@ -76,9 +75,6 @@ class MainViewModel : ViewModel() {
         _openRegisterReviewEvent.value = Event(true)
     }
 
-    private val _animeId = MutableStateFlow<String>("")
-    val animeId: StateFlow<String> = _animeId.asStateFlow()
-
     private val _rating = MutableStateFlow<Float>(0F)
     val rating: StateFlow<Float> = _rating.asStateFlow()
 
@@ -86,12 +82,7 @@ class MainViewModel : ViewModel() {
         _rating.value = rating
     }
 
-    fun setAnimeId(animeId: String) {
-        _animeId.value = animeId
-    }
-
     fun setAnimeInfo(animeInfo: AnimeInfo) {
         _animeInfo.value = animeInfo
-        _animeId.value = animeInfo.id.toString()
     }
 }

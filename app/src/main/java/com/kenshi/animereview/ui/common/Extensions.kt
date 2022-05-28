@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+//ViewExt
 fun View.showKeyboard(requestFocus: Boolean = false) {
     if (requestFocus) this.requestFocus()
     (this.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
@@ -23,6 +24,18 @@ fun View.showKeyboard(requestFocus: Boolean = false) {
 fun View.hideKeyboard(clearFocus: Boolean = false) {
     if (clearFocus) this.clearFocus()
     (this.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(this.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+}
+
+fun View.visible() {
+    visibility = View.VISIBLE
+}
+
+fun View.invisible() {
+    visibility = View.INVISIBLE
+}
+
+fun View.gone() {
+    visibility = View.GONE
 }
 
 //Float type 의 DP -> Px

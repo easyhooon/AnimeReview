@@ -3,6 +3,7 @@ package com.kenshi.animereview.ui.common
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -15,6 +16,7 @@ import com.kenshi.animereview.ui.base.UiState
 import com.kenshi.animereview.ui.base.successOrNull
 import com.kenshi.animereview.ui.home.MockAnimeAdapter
 import com.kenshi.animereview.ui.home.RecommendAnimeAdapter
+import java.text.DecimalFormat
 
 @BindingAdapter("imageUrl")
 fun ImageView.bindImage(imageUrl: String?) {
@@ -77,6 +79,13 @@ fun View.bindToast(throwable: Throwable?) {
     throwable?.message?.let { errorMessage ->
         Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
     }
+}
+
+@BindingAdapter("rating")
+fun TextView.bindText(rating: String) {
+    val df = DecimalFormat("##0.0")
+    val starRating = rating.toFloat() / 20f
+    this.text = df.format(starRating)
 }
 
 //@BindingAdapter("tags")

@@ -80,7 +80,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
-                    android:text="@{anime.attributes.averageRating}"
+                    app:rating="@{anime.attributes.averageRating}"
                     android:visibility="@{TextUtils.isEmpty(anime.attributes.averageRating) ? View.GONE :View.VISIBLE}"
                     app:layout_constraintBottom_toBottomOf="@id/iv_rating_start"
                     app:layout_constraintStart_toEndOf="@id/iv_rating_start"

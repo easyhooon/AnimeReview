@@ -20,7 +20,6 @@ data class Review(val reviewId: String? = null,
    companion object {
        fun DocumentSnapshot.toReview(): Review? {
            return try {
-               //val reviewId = getString("review_id")!!
                val animeId = getString("anime_id")!!
                val userId = getString("user_id")!!
                val rating = getString("profile_image")!!

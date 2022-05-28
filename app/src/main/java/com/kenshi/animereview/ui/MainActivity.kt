@@ -1,12 +1,11 @@
-package com.kenshi.animereview
+package com.kenshi.animereview.ui
 
 import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.kenshi.animereview.R
 import com.kenshi.animereview.databinding.ActivityMainBinding
 import com.kenshi.animereview.ui.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint

@@ -11,12 +11,14 @@ import com.kenshi.animereview.data.model.Review
 import com.kenshi.animereview.databinding.FragmentRegisterReviewBinding
 import com.kenshi.animereview.ui.MainViewModel
 import com.kenshi.animereview.ui.base.BaseFragment
+import com.kenshi.animereview.ui.base.successOrNull
+import com.kenshi.animereview.ui.common.collectLatestLifecycleFlow
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class RegisterReviewFragment : BaseFragment<FragmentRegisterReviewBinding>(R.layout.fragment_register_review) {
 
-    lateinit var animeInfo: AnimeInfo
+    //lateinit var animeInfo: AnimeInfo
 
     companion object {
         const val ANIME_INFO = "animeInfo"
@@ -26,16 +28,17 @@ class RegisterReviewFragment : BaseFragment<FragmentRegisterReviewBinding>(R.lay
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        arguments?.apply {
-            animeInfo = getParcelable(ANIME_INFO)!!
-        }
+//        arguments?.apply {
+//            animeInfo = getParcelable(ANIME_INFO)!!
+//        }
 
         bind {
-            anime = animeInfo
+            anime = viewModel.animeInfo.value
             vm = viewModel
         }
         initNavigation()
         initRatingBar()
+        initObserver()
     }
 
     private fun initNavigation() {
@@ -48,6 +51,12 @@ class RegisterReviewFragment : BaseFragment<FragmentRegisterReviewBinding>(R.lay
     private fun initRatingBar() {
         binding.rbRegisterReview.setOnRatingBarChangeListener { _, rating, _ ->
             viewModel.setRating(rating)
+        }
+    }
+
+    private fun initObserver() {
+        collectLatestLifecycleFlow(viewModel.review) { review ->
+
         }
     }
 }

@@ -13,13 +13,9 @@
             name="anime"
             type="com.kenshi.animereview.data.model.AnimeInfo" />
 
-        <!--        <variable-->
-        <!--            name="review"-->
-        <!--            type="com.kenshi.animereview.data.model.Review" />-->
-
-        <!--        <variable-->
-        <!--            name="vm"-->
-        <!--            type="com.kenshi.animereview.ui.register.RegisterReviewViewModel" /> -->
+        <variable
+            name="review"
+            type="com.kenshi.animereview.data.model.Review" />
 
         <variable
             name="vm"
@@ -219,10 +215,11 @@
                 <EditText
                     android:id="@+id/et_register_review"
                     android:layout_width="0dp"
-                    android:inputType="text"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="32dp"
+                    android:inputType="text"
+                    android:text="@={vm.inputText}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/rb_register_review" />
@@ -235,6 +232,7 @@
                     android:layout_marginTop="32dp"
                     android:backgroundTint="@color/anime_purple"
                     android:text="@string/register"
+                    android:onClick="@{()-> vm.registerReview()}"
                     android:textColor="@color/anime_white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

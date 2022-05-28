@@ -23,7 +23,7 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(
 //    private val userRepository: UserRepository,
-    private val preferenceManager: PreferenceManager
+    private val preferenceManager: PreferenceManager,
 ) : ViewModel() {
     //val myStateLiveData = MutableLiveData<MyState>(MyState.Uninitialized)
 
@@ -33,20 +33,19 @@ class LoginViewModel @Inject constructor(
     private val _userLiveData = MutableLiveData<User>()
     val userLiveData: LiveData<User> = _userLiveData
 
-    fun saveUserInfo(userId: String, userInfo: User) {
-//            db.collection(USER_PATH).document(userId).set(userInfo).await()
-        db.collection(USER_PATH)
-            .document(userId)
-            .set(userInfo)
+    fun saveUserInfo(userId: String, userInfo: User, idToken: String) {
+        val ref = db.collection(USER_PATH).document(userId)
+
+        ref.set(userInfo)
             .addOnSuccessListener {
                 _userLiveData.value = userInfo
                 Timber.d("Save Success")
+                saveToken(idToken)
             }
             .addOnFailureListener {
                 Timber.d("Save Fail")
             }
     }
-
     fun saveToken(idToken: String) = viewModelScope.launch {
         withContext(Dispatchers.IO) {
             preferenceManager.putIdToken(idToken)

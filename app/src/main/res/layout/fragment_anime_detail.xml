@@ -17,13 +17,13 @@
             name="anime_review"
             type="com.kenshi.animereview.data.model.Review" />
 
-<!--        <variable-->
-<!--            name="vm"-->
-<!--            type="com.kenshi.animereview.ui.anime_detail.AnimeDetailViewModel" />-->
-
         <variable
             name="vm"
             type="com.kenshi.animereview.ui.MainViewModel" />
+
+        <variable
+            name="review_adapter"
+            type="com.kenshi.animereview.ui.anime_detail.AnimeReviewAdapter" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -84,11 +84,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
-                    app:rating="@{anime.attributes.averageRating}"
                     android:visibility="@{TextUtils.isEmpty(anime.attributes.averageRating) ? View.GONE :View.VISIBLE}"
                     app:layout_constraintBottom_toBottomOf="@id/iv_rating_start"
                     app:layout_constraintStart_toEndOf="@id/iv_rating_start"
                     app:layout_constraintTop_toTopOf="@id/iv_rating_start"
+                    app:rating="@{anime.attributes.averageRating}"
                     tools:text="83.2" />
 
                 <View
@@ -215,23 +215,32 @@
                     android:background="#eeeff1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_anime_average_rating" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_anime_synopsis" />
 
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_anime_review"
-                    android:layout_width="0dp"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginBottom="24dp"
-                    android:nestedScrollingEnabled="false"
-                    android:orientation="vertical"
-                    android:visibility="gone"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:background="#eeeff1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/view_divider_anime_review" />
+                    app:layout_constraintTop_toBottomOf="@id/view_divider_anime_review">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_anime_review"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="24dp"
+                        android:nestedScrollingEnabled="false"
+                        android:orientation="vertical"
+                        app:adapter="@{review_adapter}"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:reviewList="@{vm.reviewList}" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -132,7 +132,7 @@
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/tv_anime_show_type"
-                            style="@style/TextMedium"
+                            style="@style/TextSubtitle1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/anime_purple"
@@ -144,7 +144,7 @@
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/tv_anime_age_rating_guide"
-                            style="@style/TextMedium"
+                            style="@style/TextSubtitle1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="4dp"
@@ -157,7 +157,7 @@
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/tv_anime_episode_count"
-                            style="@style/TextMedium"
+                            style="@style/TextSubtitle1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="4dp"
@@ -170,7 +170,7 @@
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/tv_anime_status"
-                            style="@style/TextMedium"
+                            style="@style/TextSubtitle1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="4dp"
@@ -220,6 +220,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingBottom="88dp"
                     android:background="#eeeff1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -239,6 +240,16 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:reviewList="@{vm.reviewList}" />
+
+                    <ProgressBar
+                        android:id="@+id/review_loading_bar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="@id/rv_anime_review"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/rv_anime_review"
+                        app:show="@{vm.reviewList}" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,10 +1,7 @@
 package com.kenshi.animereview.ui.common
 
 import android.view.View
-import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.chip.Chip
@@ -12,11 +9,14 @@ import com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
 import com.kenshi.animereview.GlideApp
 import com.kenshi.animereview.data.model.AnimeInfo
 import com.kenshi.animereview.data.model.MockAnimeInfo
+import com.kenshi.animereview.data.model.Review
+import com.kenshi.animereview.ui.anime_detail.AnimeReviewAdapter
 import com.kenshi.animereview.ui.base.UiState
 import com.kenshi.animereview.ui.base.successOrNull
 import com.kenshi.animereview.ui.home.MockAnimeAdapter
 import com.kenshi.animereview.ui.home.RecommendAnimeAdapter
 import java.text.DecimalFormat
+
 
 @BindingAdapter("imageUrl")
 fun ImageView.bindImage(imageUrl: String?) {
@@ -40,7 +40,13 @@ fun RecyclerView.bindAnimeList(animeList: UiState<List<AnimeInfo>>) {
     }
 }
 
-
+@BindingAdapter("reviewList")
+fun RecyclerView.bindReviewList(reviewList: UiState<List<Review>>) {
+    val boundAdapter = this.adapter
+    if (boundAdapter is AnimeReviewAdapter) {
+        boundAdapter.submitList(reviewList.successOrNull())
+    }
+}
 
 @BindingAdapter("mockAnimeList")
 fun RecyclerView.bindMockAnimeList(animeList: MutableList<MockAnimeInfo>) {
@@ -59,14 +65,6 @@ fun CarouselRecyclerview.bindAnimeAdapter(adapter: RecyclerView.Adapter<*>) {
 //    setFlat(false)
     setIntervalRatio(0.5f)
     isNestedScrollingEnabled = false
-}
-
-@BindingAdapter("skinItems")
-fun RecyclerView.bindRecommendAnimeList(animeList: List<AnimeInfo>?) {
-    val boundAdapter = this.adapter
-    if (boundAdapter is RecommendAnimeAdapter && !animeList.isNullOrEmpty()) {
-        boundAdapter.submitList(animeList)
-    }
 }
 
 @BindingAdapter("show")

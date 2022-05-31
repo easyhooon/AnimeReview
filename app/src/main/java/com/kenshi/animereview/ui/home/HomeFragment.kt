@@ -4,17 +4,17 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.kenshi.animereview.R
 import com.kenshi.animereview.data.model.AnimeInfo
-import com.kenshi.animereview.data.model.MockAnimeInfo
 import com.kenshi.animereview.databinding.FragmentHomeBinding
 import com.kenshi.animereview.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 import timber.log.Timber
+
+
+//TODO display name 을 통해 ~님
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
@@ -26,7 +26,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private val viewModel: HomeViewModel by viewModels()
 
-    //TODO ConcatAdapter 고민
+    //TODO ConcatAdapter 고민, viewtype 나누어 하나의 어댑터로..
 
 //    private val mockAnimeAdapter: MockAnimeAdapter by lazy {
 //        MockAnimeAdapter { animeInfo ->
@@ -79,13 +79,4 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             )
         )
     }
-
-//    // 계속 반복되는 함수이므로 재사용하기 위한 모듈화
-//    private fun <T> collectLatestLifecycleFlow(flow: Flow<T>, collect: suspend (T) -> Unit) {
-//        lifecycleScope.launch {
-//            repeatOnLifecycle(Lifecycle.State.STARTED) {
-//                flow.collectLatest(collect)
-//            }
-//        }
-//    }
 }

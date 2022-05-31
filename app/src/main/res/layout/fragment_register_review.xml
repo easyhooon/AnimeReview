@@ -80,11 +80,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
-                    app:rating="@{anime.attributes.averageRating}"
                     android:visibility="@{TextUtils.isEmpty(anime.attributes.averageRating) ? View.GONE :View.VISIBLE}"
                     app:layout_constraintBottom_toBottomOf="@id/iv_rating_start"
                     app:layout_constraintStart_toEndOf="@id/iv_rating_start"
                     app:layout_constraintTop_toTopOf="@id/iv_rating_start"
+                    app:rating="@{anime.attributes.averageRating}"
                     tools:text="83.2" />
 
                 <View
@@ -218,7 +218,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="32dp"
+                    android:imeOptions="actionDone"
                     android:inputType="text"
+                    android:onEditorAction="@{(view, actionId, event) -> vm.onDoneClicked(view, actionId, event)}"
                     android:text="@={vm.reviewText}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -231,8 +233,8 @@
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="32dp"
                     android:backgroundTint="@color/anime_purple"
-                    android:text="@string/register"
                     android:onClick="@{()-> vm.registerReview()}"
+                    android:text="@string/register"
                     android:textColor="@color/anime_white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

@@ -34,5 +34,9 @@
         android:id="@+id/navigation_register_review"
         android:name="com.kenshi.animereview.ui.register.RegisterReviewFragment"
         android:label="RegisterReviewFragment"
-        tools:layout="@layout/fragment_register_review"/>
+        tools:layout="@layout/fragment_register_review">
+        <action
+            android:id="@+id/action_navigation_register_review_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
 </navigation>

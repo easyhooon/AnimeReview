@@ -5,7 +5,6 @@ import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.QuerySnapshot
 import com.kenshi.animereview.data.model.AnimeInfo
 import com.kenshi.animereview.data.model.Review
-import com.kenshi.animereview.data.model.Review.Companion.toReview
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow

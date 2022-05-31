@@ -13,23 +13,23 @@ import timber.log.Timber
 @Parcelize
 data class Review(val reviewId: String? = null,
                   val animeId: String? = null,
-                  val userId: String? = null,
+                  val user: User? = null,
                   var rating: String? = null,
                   val reviewText: String? = null
 ) : Parcelable {
    companion object {
-       fun DocumentSnapshot.toReview(): Review? {
-           return try {
-               val animeId = getString("anime_id")!!
-               val userId = getString("user_id")!!
-               val rating = getString("profile_image")!!
-               val reviewText = getString("review_text")!!
-               Review(id, animeId, userId, rating, reviewText)
-           } catch (e: Exception) {
-               Timber.e(e, "Error converting review")
-               null
-           }
-       }
+//       fun DocumentSnapshot.toReview(): Review? {
+//           return try {
+//               val animeId = getString("anime_id")!!
+//               val user = getParcelableObject("user")!!
+//               val rating = getString("profile_image")!!
+//               val reviewText = getString("review_text")!!
+//               Review(id, animeId, user, rating, reviewText)
+//           } catch (e: Exception) {
+//               Timber.e(e, "Error converting review")
+//               null
+//           }
+//       }
 
        val EMPTY = Review
    }

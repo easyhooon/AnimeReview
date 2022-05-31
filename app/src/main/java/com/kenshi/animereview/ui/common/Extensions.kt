@@ -57,6 +57,7 @@ inline fun Fragment.launchAndRepeatWithViewLifecycle(
     }
 }
 
+// 계속 반복되는 함수이므로 재사용하기 위한 모듈화
 fun <T> Fragment.collectLatestLifecycleFlow(flow: Flow<T>, collect: suspend (T) -> Unit) {
     viewLifecycleOwner.lifecycleScope.launch {
         repeatOnLifecycle(Lifecycle.State.STARTED) {

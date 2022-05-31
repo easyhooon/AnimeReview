@@ -9,11 +9,8 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
-import com.kenshi.animereview.data.model.AnimeInfo
 import com.kenshi.animereview.data.model.Review
 import com.kenshi.animereview.data.model.User
-import com.kenshi.animereview.exceptions.EmptyBodyException
-import com.kenshi.animereview.exceptions.NetworkFailureException
 import com.kenshi.animereview.ui.base.UiState
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.tasks.await
@@ -71,12 +68,12 @@ class MyViewModel (
 //            }
 //    }
 
-    fun fetchUserInfo(): Flow<UiState<User>> = flow<UiState<User>> {
+    private fun fetchUserInfo(): Flow<UiState<User>> = flow<UiState<User>> {
         emit(UiState.Loading)
         val userRef = db.collection(USER_PATH).document(currentUser.uid)
         val userInfo = userRef.get().await().toObject<User>()!!
 //        _user.value = userInfo
-        Timber.tag("fetch Success").d("${userInfo}")
+        Timber.tag("fetch Success").d("$userInfo")
         emit(UiState.Success(userInfo))
     }
 }

@@ -21,9 +21,13 @@ class AnimeRepositoryImpl @Inject constructor(
 ) : AnimeRepository {
 
     // 맞춤 추천 api 가 없으므로 임의의 애니메이션을 선택하여 골라 list 에 담아서 emit 하는 방식 선택
-    // 순서대로 카우보이 비밥, 스파이 패밀리, 진격의 거인, 귀멸의 칼날, 슈타인즈게이트, 카구야, 비스타즈, 비스크돌, 86, 좀비랜드 사가
+    // 순서대로 카우보이 비밥, 스파이 패밀리, 진격의 거인, 귀멸의 칼날, 슈타인즈게이트, 카구야, 비스타즈, 비스크돌, 강연금, 좀비랜드 사가
+    // 데스노트, 주술회전, 히로아카, 원펀맨, 모브사이코, 코드기어스, 바이올렛 에버가든, 메이드인어비스, 나만이 없는 거리, 사이코패스
+    // 하이큐, 에반게리온, 4구라, 헬싱ova, 기생수, 너의 이름은, 센과 치히로, 시달소, 오드택시, 체인소맨
     private val recommendAnimeIdList: MutableList<String> = mutableListOf(
-        "1", "45398", "7442", "41370", "5646", "41373", "42147", "44382", "42147", "41459"
+        "1", "45398", "7442", "41370", "5646", "41373", "42147", "44382", "3936", "41459",
+        "1376", "42765", "11469", "10740", "11578", "1415", "12230", "13273", "11110", "7000",
+        "8133", "21", "8403", "695", "8147", "11614", "176", "2027", "43932", "43806"
     )
 
     //TODO 효율적으로 호출 방법으로 개선                                                                                   ㄴㄴ
@@ -34,19 +38,31 @@ class AnimeRepositoryImpl @Inject constructor(
 //                val response = animeService.fetchAnimeById(id)
 //                response.body()?.let { recommendAnimeList.add(it.Anime) }
 //            }
+            val randomIndexList = getRandomNumber()
+            Timber.tag("randomIndexList").d("$randomIndexList")
 
             //TODO 비동기 처리, Combine 연산자로 변경해볼 것
             withContext(ioDispatcher) {
-                val response1 = async { animeService.fetchAnimeById("1") }
-                val response2 = async {animeService.fetchAnimeById("45398") }
-                val response3 = async { animeService.fetchAnimeById("7442") }
-                val response4 = async { animeService.fetchAnimeById("41370") }
-                val response5 = async { animeService.fetchAnimeById("5646") }
-                val response6 = async { animeService.fetchAnimeById("41373") }
-                val response7 = async { animeService.fetchAnimeById("42147") }
-                val response8 = async { animeService.fetchAnimeById("44382") }
-                val response9 = async { animeService.fetchAnimeById("42147") }
-                val response10 = async { animeService.fetchAnimeById("41459") }
+                val response1 =
+                    async { animeService.fetchAnimeById(recommendAnimeIdList[randomIndexList[0]]) }
+                val response2 =
+                    async { animeService.fetchAnimeById(recommendAnimeIdList[randomIndexList[1]]) }
+                val response3 =
+                    async { animeService.fetchAnimeById(recommendAnimeIdList[randomIndexList[2]]) }
+                val response4 =
+                    async { animeService.fetchAnimeById(recommendAnimeIdList[randomIndexList[3]]) }
+                val response5 =
+                    async { animeService.fetchAnimeById(recommendAnimeIdList[randomIndexList[4]]) }
+                val response6 =
+                    async { animeService.fetchAnimeById(recommendAnimeIdList[randomIndexList[5]]) }
+                val response7 =
+                    async { animeService.fetchAnimeById(recommendAnimeIdList[randomIndexList[6]]) }
+                val response8 =
+                    async { animeService.fetchAnimeById(recommendAnimeIdList[randomIndexList[7]]) }
+                val response9 =
+                    async { animeService.fetchAnimeById(recommendAnimeIdList[randomIndexList[8]]) }
+                val response10 =
+                    async { animeService.fetchAnimeById(recommendAnimeIdList[randomIndexList[9]]) }
 
                 recommendAnimeList = mutableListOf(
                     response1.await().body()!!.Anime,
@@ -109,5 +125,17 @@ class AnimeRepositoryImpl @Inject constructor(
 
     override fun fetchSearchAnime(title: String): Flow<UiState<List<AnimeInfo>>> {
         TODO("Not yet implemented")
+    }
+
+    private fun getRandomNumber(): List<Int> {
+        val numberList = mutableListOf<Int>().apply {
+            for (i in 0 until 30) {
+                this.add(i)
+            }
+            this.shuffle()
+        }
+
+        val newList = numberList.subList(0, 10)
+        return newList.sorted()
     }
 }

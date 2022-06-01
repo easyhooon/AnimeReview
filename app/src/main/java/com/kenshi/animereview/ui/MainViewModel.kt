@@ -15,6 +15,7 @@ import com.google.firebase.ktx.Firebase
 import com.kenshi.animereview.data.model.AnimeInfo
 import com.kenshi.animereview.data.model.Review
 import com.kenshi.animereview.data.model.User
+import com.kenshi.animereview.data.model.UserReview
 import com.kenshi.animereview.ui.base.UiState
 import com.kenshi.animereview.ui.common.Event
 import com.kenshi.animereview.ui.common.hideKeyboard
@@ -33,6 +34,7 @@ class MainViewModel : ViewModel() {
     val review: StateFlow<Review> = _review.asStateFlow()
 
     private val REVIEW_PATH = "reviews"
+    private val USER_PATH = "users"
     private var db = FirebaseFirestore.getInstance()
 
     private val firebaseAuth: FirebaseAuth by lazy {
@@ -44,25 +46,35 @@ class MainViewModel : ViewModel() {
 
     val reviewText = MutableLiveData<String>()
 
-    val reviewList: StateFlow<UiState<List<Review>>> = fetchReviewList()
+    val reviewList: StateFlow<UiState<List<UserReview>>> = fetchReviewList()
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000L),
             initialValue = UiState.Loading
         )
 
-    //TODO 수정 해야 함
-    private fun fetchReviewList(): Flow<UiState<List<Review>>> = flow<UiState<List<Review>>> {
+    private fun fetchReviewList(): Flow<UiState<List<UserReview>>> = flow<UiState<List<UserReview>>> {
         emit(UiState.Loading)
         val reviewRef = db.collection(REVIEW_PATH)
+        val userRef = db.collection(USER_PATH)
+        val userReviewList = mutableListOf<UserReview>()
         val reviewList =
-            // query 가 잘못된거같기도
-            // 초기값으로 null 값을 받아서 못받았다가 후에 변화된 값이 mapping 되는거 같음
-            // 것도 그런게 home -> detail로 넘어올때는 bundle 로 넘어오지 animeInfo 를 set 하지 않음
-            // 왜? 같은 뷰모델이 아니니깐
             reviewRef.whereEqualTo("animeId", animeInfo.value.id).get().await().toObjects<Review>()
+        for(review in reviewList) {
+            val userInfo
+                    = userRef.whereEqualTo("userId", review.userId).get().await().toObjects<User>()
+            userReviewList.add(UserReview(
+                reviewId = review.reviewId,
+                animeId = review.animeId,
+                user = userInfo[0],
+                rating = review.rating,
+                reviewText = review.reviewText
+            ))
+        }
         Timber.tag("fetch Success").d("$reviewList")
-        emit(UiState.Success(reviewList))
+        Timber.tag("fetch Success").d("$userReviewList")
+        //emit(UiState.Success(reviewList))
+        emit(UiState.Success(userReviewList))
     }
 
     fun registerReview() {
@@ -72,11 +84,7 @@ class MainViewModel : ViewModel() {
         val reviewInfo = Review(
             refId,
             _animeInfo.value.id,
-            User(
-                userId = currentUser.uid,
-                name = currentUser.displayName,
-                email = currentUser.email,
-                profileImageUrl = currentUser.photoUrl.toString()),
+            currentUser.uid,
             _rating.value.toString(),
             reviewText.value
         )

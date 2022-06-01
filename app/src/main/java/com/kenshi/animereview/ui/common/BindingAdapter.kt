@@ -9,7 +9,7 @@ import com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
 import com.kenshi.animereview.GlideApp
 import com.kenshi.animereview.data.model.AnimeInfo
 import com.kenshi.animereview.data.model.MockAnimeInfo
-import com.kenshi.animereview.data.model.Review
+import com.kenshi.animereview.data.model.UserReview
 import com.kenshi.animereview.ui.anime_detail.AnimeReviewAdapter
 import com.kenshi.animereview.ui.base.UiState
 import com.kenshi.animereview.ui.base.successOrNull
@@ -40,11 +40,19 @@ fun RecyclerView.bindAnimeList(animeList: UiState<List<AnimeInfo>>) {
     }
 }
 
+//@BindingAdapter("reviewList")
+//fun RecyclerView.bindReviewList(reviewList: UiState<List<Review>>) {
+//    val boundAdapter = this.adapter
+//    if (boundAdapter is AnimeReviewAdapter) {
+//        boundAdapter.submitList(reviewList.successOrNull())
+//    }
+//}
+
 @BindingAdapter("reviewList")
-fun RecyclerView.bindReviewList(reviewList: UiState<List<Review>>) {
+fun RecyclerView.bindReviewList(userReviewList: UiState<List<UserReview>>) {
     val boundAdapter = this.adapter
     if (boundAdapter is AnimeReviewAdapter) {
-        boundAdapter.submitList(reviewList.successOrNull())
+        boundAdapter.submitList(userReviewList.successOrNull())
     }
 }
 

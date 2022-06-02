@@ -39,6 +39,8 @@ class RegisterReviewFragment : BaseFragment<FragmentRegisterReviewBinding>(R.lay
 
     private fun returnHome() {
         showToast("리뷰가 등록되었습니다")
+        //리뷰 editText 값 초기화
+        viewModel.resetReviewText()
         findNavController().navigate(R.id.action_navigation_register_review_to_navigation_home)
     }
 

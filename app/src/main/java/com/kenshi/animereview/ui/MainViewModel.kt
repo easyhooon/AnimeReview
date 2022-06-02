@@ -27,12 +27,6 @@ import timber.log.Timber
 //    private val reviewRepository: ReviewRepository
 class MainViewModel : ViewModel() {
 
-    private val _animeInfo = MutableStateFlow(AnimeInfo())
-    val animeInfo: StateFlow<AnimeInfo> = _animeInfo.asStateFlow()
-
-    private val _review = MutableStateFlow<Review>(Review())
-    val review: StateFlow<Review> = _review.asStateFlow()
-
     private val REVIEW_PATH = "reviews"
     private val USER_PATH = "users"
     private var db = FirebaseFirestore.getInstance()
@@ -44,7 +38,27 @@ class MainViewModel : ViewModel() {
         firebaseAuth.currentUser!!
     }
 
+
+    private val _animeInfo = MutableStateFlow(AnimeInfo())
+    val animeInfo: StateFlow<AnimeInfo> = _animeInfo.asStateFlow()
+
+    private val _review = MutableStateFlow<Review>(Review())
+    val review: StateFlow<Review> = _review.asStateFlow()
+
     val reviewText = MutableLiveData<String>()
+
+    private val _openRegisterReviewEvent = MutableLiveData<Event<Boolean>>()
+    val openRegisterReviewEvent: LiveData<Event<Boolean>> = _openRegisterReviewEvent
+
+    private val _returnHomeEvent = MutableLiveData<Event<Boolean>>()
+    val returnHomeEvent: LiveData<Event<Boolean>> = _returnHomeEvent
+
+    private val _rating = MutableStateFlow<Float>(0F)
+    val rating: StateFlow<Float> = _rating.asStateFlow()
+
+    fun resetReviewText() {
+        reviewText.value = ""
+    }
 
     val reviewList: StateFlow<UiState<List<UserReview>>> = fetchReviewList()
         .stateIn(
@@ -100,22 +114,13 @@ class MainViewModel : ViewModel() {
             }
     }
 
-    private val _openRegisterReviewEvent = MutableLiveData<Event<Boolean>>()
-    val openRegisterReviewEvent: LiveData<Event<Boolean>> = _openRegisterReviewEvent
-
-    private val _returnHomeEvent = MutableLiveData<Event<Boolean>>()
-    val returnHomeEvent: LiveData<Event<Boolean>> = _returnHomeEvent
-
     fun openRegisterReview() {
         _openRegisterReviewEvent.value = Event(true)
     }
 
-    fun returnHome() {
+    private fun returnHome() {
         _returnHomeEvent.value = Event(true)
     }
-
-    private val _rating = MutableStateFlow<Float>(0F)
-    val rating: StateFlow<Float> = _rating.asStateFlow()
 
     fun setRating(rating: Float) {
         _rating.value = rating

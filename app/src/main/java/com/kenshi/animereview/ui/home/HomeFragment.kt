@@ -1,20 +1,17 @@
 package com.kenshi.animereview.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.kenshi.animereview.R
 import com.kenshi.animereview.data.model.AnimeInfo
 import com.kenshi.animereview.databinding.FragmentHomeBinding
+import com.kenshi.animereview.ui.anime_review.AnimationReviewActivity
 import com.kenshi.animereview.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
-
-
-//TODO display name 을 통해 ~님
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
@@ -73,10 +70,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 //    }
 
     private fun navigateToDetail(animeInfo: AnimeInfo) {
-        findNavController().navigate(
-            R.id.action_navigation_home_to_animeDetailFragment, bundleOf(
-                ANIME_INFO to animeInfo
-            )
-        )
+//        findNavController().navigate(
+////            R.id.action_navigation_home_to_animeDetailFragment, bundleOf(
+////                ANIME_INFO to animeInfo
+////            )
+//        )
+        val intent = Intent(requireActivity(), AnimationReviewActivity::class.java).apply{
+            Timber.d("$animeInfo")
+            putExtra(ANIME_INFO, animeInfo)
+        }
+        startActivity(intent)
+
+        //startActivity(Intent(this, AnimationReviewActivity::class.java))
     }
 }

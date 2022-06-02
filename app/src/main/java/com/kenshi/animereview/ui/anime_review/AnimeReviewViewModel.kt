@@ -1,4 +1,4 @@
-package com.kenshi.animereview.ui
+package com.kenshi.animereview.ui.anime_review
 
 import android.view.KeyEvent
 import android.view.View
@@ -23,9 +23,7 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.tasks.await
 import timber.log.Timber
 
-//class MainViewModel @Inject constructor(
-//    private val reviewRepository: ReviewRepository
-class MainViewModel : ViewModel() {
+class AnimeReviewViewModel: ViewModel() {
 
     private val REVIEW_PATH = "reviews"
     private val USER_PATH = "users"
@@ -139,4 +137,3 @@ class MainViewModel : ViewModel() {
         return false
     }
 }
-

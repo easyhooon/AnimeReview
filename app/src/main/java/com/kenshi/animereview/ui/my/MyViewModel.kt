@@ -16,6 +16,7 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.tasks.await
 import timber.log.Timber
 
+//TODO @Inject 가 아닌 Hilt Module 을 통해 주입받아야 함
 //@HiltViewModel
 //class MyViewModel @Inject constructor(
 class MyViewModel (
@@ -39,14 +40,13 @@ class MyViewModel (
     private val _reviews = MutableLiveData<List<Review>>()
     val reviews: LiveData<List<Review>> = _reviews
 
-/*    init {
+//    init {
 //        viewModelScope.launch {
 //            fetchUserInfo(currentUser.uid)
 //            _reviews.value = FirebaseProfileService.getReviews()
 //        }
-
-        fetchUserInfo()
-    }*/
+//        fetchUserInfo()
+//    }
 
     val userInfo: StateFlow<UiState<User>> = fetchUserInfo()
         .stateIn(
@@ -77,19 +77,3 @@ class MyViewModel (
         emit(UiState.Success(userInfo))
     }
 }
-
-//    override fun fetchAnimeById(id: String): Flow<UiState<AnimeInfo>> = flow<UiState<AnimeInfo>> {
-//        val response = animeService.fetchAnimeById(id)
-//        if (response.isSuccessful) {
-//            Timber.tag("response.body()").d("${response.body()}")
-//            val anime: AnimeInfo =
-//                response.body()?.Anime
-//                    ?: throw EmptyBodyException("[${response.code()}] - ${response.raw()}")
-//            Timber.tag("anime").d("$anime")
-//            emit(UiState.Success(anime))
-//        } else {
-//            Timber.tag("request fail").d("${response.errorBody()}")
-//            throw NetworkFailureException("[${response.code()}] - ${response.raw()}")
-//        }
-//    }.catch { emit(UiState.Error(it)) }
-//}

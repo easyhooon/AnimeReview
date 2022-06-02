@@ -10,7 +10,7 @@ import com.kenshi.animereview.GlideApp
 import com.kenshi.animereview.data.model.AnimeInfo
 import com.kenshi.animereview.data.model.MockAnimeInfo
 import com.kenshi.animereview.data.model.UserReview
-import com.kenshi.animereview.ui.anime_detail.AnimeReviewAdapter
+import com.kenshi.animereview.ui.anime_review.AnimeReviewAdapter
 import com.kenshi.animereview.ui.base.UiState
 import com.kenshi.animereview.ui.base.successOrNull
 import com.kenshi.animereview.ui.home.MockAnimeAdapter

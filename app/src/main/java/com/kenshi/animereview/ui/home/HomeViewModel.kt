@@ -2,6 +2,9 @@ package com.kenshi.animereview.ui.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.kenshi.animereview.data.model.AnimeInfo
 import com.kenshi.animereview.domain.repository.AnimeRepository
 import com.kenshi.animereview.ui.base.UiState
@@ -13,6 +16,16 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val animeRepository: AnimeRepository
 ) : ViewModel() {
+    private val firebaseAuth: FirebaseAuth by lazy {
+        Firebase.auth
+    }
+    private val currentUser by lazy {
+        firebaseAuth.currentUser!!
+    }
+
+    private val _userName = MutableStateFlow<String>(currentUser.displayName.toString())
+    val userName: StateFlow<String> = _userName.asStateFlow()
+
     val animeListById: StateFlow<UiState<List<AnimeInfo>>> = animeRepository.fetchAnimeListById()
         .stateIn(
             scope = viewModelScope,

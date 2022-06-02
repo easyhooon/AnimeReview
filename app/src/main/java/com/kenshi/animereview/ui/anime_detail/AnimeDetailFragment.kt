@@ -49,7 +49,6 @@ class AnimeDetailFragment: BaseFragment<FragmentAnimeDetailBinding>(R.layout.fra
 
     private fun initNavigation() {
         binding.tbAnimeDetail.setOnClickListener {
-            // TODO 뒤로 가기 Shoppi 참고 구현
             findNavController().navigateUp()
         }
 

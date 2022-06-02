@@ -28,8 +28,7 @@ class RegisterReviewFragment : BaseFragment<FragmentRegisterReviewBinding>(R.lay
     }
 
     private fun initNavigation() {
-        binding.tbAnimeDetail.setOnClickListener {
-            // 뒤로 가기
+        binding.tbRegisterReview.setOnClickListener {
             findNavController().navigateUp()
         }
 

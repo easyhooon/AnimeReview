@@ -72,7 +72,7 @@
                     android:paddingStart="16dp"
                     android:paddingTop="24dp"
                     android:paddingEnd="16dp"
-                    android:text="@string/recommend_animation"
+                    android:text="@{@string/user_recommend_animation(vm.userName)}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -121,7 +121,7 @@
                     android:paddingStart="16dp"
                     android:paddingTop="24dp"
                     android:paddingEnd="16dp"
-                    android:text="장르별 애니메이션 - 어드벤처"
+                    android:text="@string/genre_animation_adventure"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/rv_recommend_anime" />

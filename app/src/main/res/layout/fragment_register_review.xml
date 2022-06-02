@@ -93,7 +93,7 @@
                     app:layout_constraintBottom_toBottomOf="@id/iv_rating_start"
                     app:layout_constraintStart_toEndOf="@id/iv_rating_start"
                     app:layout_constraintTop_toTopOf="@id/iv_rating_start"
-                    app:rating="@{anime.attributes.averageRating}"
+                    app:rating='@{anime.attributes.averageRating ?? ""}'
                     tools:text="83.2" />
 
                 <View
@@ -161,7 +161,7 @@
                             android:checkable="false"
                             android:textColor="@color/anime_white"
                             android:visibility="@{TextUtils.isEmpty(anime.attributes.episodeCount.toString()) ? View.GONE : View.VISIBLE}"
-                            app:episode="@{anime.attributes.episodeCount.toString()}"
+                            app:episode='@{anime.attributes.episodeCount.toString() ?? ""}'
                             tools:text="12화" />
 
                         <com.google.android.material.chip.Chip

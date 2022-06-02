@@ -20,7 +20,7 @@ import java.text.DecimalFormat
 
 @BindingAdapter("imageUrl")
 fun ImageView.bindImage(imageUrl: String?) {
-    if(!imageUrl.isNullOrEmpty()) {
+    if (!imageUrl.isNullOrEmpty()) {
         GlideApp.with(context)
             .load(imageUrl)
             .into(this)
@@ -88,11 +88,14 @@ fun View.bindToast(throwable: Throwable?) {
 }
 
 @BindingAdapter("rating")
-fun TextView.bindText(rating: String) {
-    val df = DecimalFormat("##0.00")
-    val starRating = rating.toFloat() / 20f
-    this.text = df.format(starRating)
+fun TextView.bindText(rating: String?) {
+    if (!rating.isNullOrEmpty()) {
+        val df = DecimalFormat("##0.00")
+        val starRating = rating.toFloat().div(20f)
+        this.text = df.format(starRating)
+    }
 }
+
 
 //@BindingAdapter("tags")
 //fun ChipGroup.bindTags(tags: List<String>?) {
@@ -110,16 +113,16 @@ fun TextView.bindText(rating: String) {
 
 @BindingAdapter("tag")
 fun Chip.bindShow(text: String) {
-   visibility = if (text.isNotEmpty()) {
-       this.text = text
-       View.VISIBLE
-   } else
-       View.GONE
+    visibility = if (text.isNotEmpty()) {
+        this.text = text
+        View.VISIBLE
+    } else
+        View.GONE
 }
 
 @BindingAdapter("episode")
-fun Chip.countEpisode(count: String) {
-    if(count.isNotEmpty()) {
+fun Chip.countEpisode(count: String?) {
+    if (!count.isNullOrEmpty()) {
         "$count episode".also { this.text = it }
     }
 }

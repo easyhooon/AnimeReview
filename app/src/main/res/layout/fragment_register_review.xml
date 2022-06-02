@@ -19,7 +19,7 @@
 
         <variable
             name="vm"
-            type="com.kenshi.animereview.ui.MainViewModel" />
+            type="com.kenshi.animereview.ui.anime_review.AnimeReviewViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -29,15 +29,24 @@
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            app:elevation="0dp">
+            android:background="@color/white">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/tb_register_review"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_scrollFlags="scroll|enterAlways"
-                app:navigationIcon="@drawable/ic_back" />
+                app:navigationIcon="@drawable/ic_back">
+
+                <TextView
+                    android:id="@+id/tv_anime_title"
+                    style="@style/TextSubtitle1.Bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{anime.attributes.canonicalTitle}"
+                    tools:text="카우보이 비밥" />
+
+            </androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -97,33 +106,23 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_anime_average_rating" />
 
-                <TextView
-                    android:id="@+id/tv_anime_title"
-                    style="@style/TextAppearance.AppCompat.Display1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_marginTop="12dp"
-                    android:text="@{anime.attributes.canonicalTitle}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/view_divider_anime_title"
-                    tools:text="카우보이 비밥" />
-
                 <HorizontalScrollView
                     android:id="@+id/hsv_anime_detail"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="12dp"
-                    android:layout_marginVertical="12dp"
                     android:overScrollMode="never"
                     android:scrollbars="none"
-                    app:layout_constraintTop_toBottomOf="@id/tv_anime_title">
+                    app:layout_constraintBottom_toTopOf="@id/tv_rate"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_anime_average_rating">
 
                     <com.google.android.material.chip.ChipGroup
                         android:id="@+id/cg_anime_detail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         app:singleLine="true">
 
                         <com.google.android.material.chip.Chip
@@ -186,7 +185,7 @@
                     android:id="@+id/view_divider_product"
                     android:layout_width="0dp"
                     android:layout_height="1dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="12dp"
                     android:background="#eeeff1"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/hsv_anime_detail" />

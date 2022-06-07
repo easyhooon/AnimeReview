@@ -113,10 +113,10 @@
                     android:layout_marginHorizontal="12dp"
                     android:overScrollMode="never"
                     android:scrollbars="none"
-                    app:layout_constraintBottom_toTopOf="@id/tv_rate"
+                    app:layout_constraintBottom_toTopOf="@id/rb_register_review"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_anime_average_rating">
+                    app:layout_constraintTop_toBottomOf="@id/view_divider_anime_title">
 
                     <com.google.android.material.chip.ChipGroup
                         android:id="@+id/cg_anime_detail"
@@ -127,53 +127,49 @@
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/tv_anime_show_type"
-                            style="@style/TextMedium"
+                            style="@style/TextSubtitle2.White.Bold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/anime_purple"
                             android:checkable="false"
                             android:text="@{anime.attributes.showType}"
-                            android:textColor="@color/anime_white"
                             android:visibility="@{TextUtils.isEmpty(anime.attributes.showType) ? View.GONE :View.VISIBLE}"
                             tools:text="TV" />
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/tv_anime_age_rating_guide"
-                            style="@style/TextMedium"
+                            style="@style/TextSubtitle2.White.Bold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="4dp"
                             android:backgroundTint="@color/anime_purple"
                             android:checkable="false"
                             android:text="@{anime.attributes.ageRatingGuide}"
-                            android:textColor="@color/anime_white"
                             android:visibility="@{TextUtils.isEmpty(anime.attributes.ageRatingGuide) ? View.GONE :View.VISIBLE}"
 
                             tools:text="7세 이상" />
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/tv_anime_episode_count"
-                            style="@style/TextMedium"
+                            style="@style/TextSubtitle2.White.Bold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="4dp"
                             android:backgroundTint="@color/anime_purple"
                             android:checkable="false"
-                            android:textColor="@color/anime_white"
                             android:visibility="@{TextUtils.isEmpty(anime.attributes.episodeCount.toString()) ? View.GONE : View.VISIBLE}"
                             app:episode='@{anime.attributes.episodeCount.toString() ?? ""}'
                             tools:text="12화" />
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/tv_anime_status"
-                            style="@style/TextMedium"
+                            style="@style/TextSubtitle2.White.Bold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="4dp"
                             android:backgroundTint="@color/anime_purple"
                             android:checkable="false"
                             android:text="@{anime.attributes.status}"
-                            android:textColor="@color/anime_white"
                             android:visibility="@{TextUtils.isEmpty(anime.attributes.status) ? View.GONE :View.VISIBLE}"
                             tools:text="방영중" />
 
@@ -182,7 +178,7 @@
                 </HorizontalScrollView>
 
                 <View
-                    android:id="@+id/view_divider_product"
+                    android:id="@+id/view_divider_rating"
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:layout_marginTop="12dp"
@@ -190,26 +186,26 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/hsv_anime_detail" />
 
-                <TextView
-                    android:id="@+id/tv_rate"
-                    style="@style/TextMedium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/rating"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/view_divider_product" />
 
                 <RatingBar
                     android:id="@+id/rb_register_review"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="12dp"
                     android:rating="@{vm.rating.floatValue()}"
+                    app:layout_constraintBottom_toTopOf="@id/view_divider_review"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_rate" />
+                    app:layout_constraintTop_toBottomOf="@id/view_divider_rating" />
+
+                <View
+                    android:id="@+id/view_divider_review"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="12dp"
+                    android:background="#eeeff1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rb_register_review" />
 
                 <EditText
                     android:id="@+id/et_register_review"
@@ -223,7 +219,7 @@
                     android:text="@={vm.reviewText}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/rb_register_review" />
+                    app:layout_constraintTop_toBottomOf="@id/view_divider_review" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_register_review"

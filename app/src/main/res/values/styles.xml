@@ -75,6 +75,14 @@
         <item name="android:textColor">@color/anime_black_01</item>
     </style>
 
+    <style name="TextSubtitle2.White">
+        <item name="android:textColor">@color/anime_white</item>
+    </style>
+
+    <style name="TextSubtitle2.White.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="TextSubtitle2.Black02" >
         <item name="android:textColor">@color/anime_black_02</item>
     </style>
@@ -160,6 +168,4 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">12sp</item>
     </style>
-
-
 </resources>

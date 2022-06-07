@@ -4,8 +4,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class UserReview(
-    val animeTitle: String? = null,
+data class AnimeReview(
     val reviewId: String? = null,
     val animeId: String? = null,
     val user: User? = null,

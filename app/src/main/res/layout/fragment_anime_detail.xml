@@ -132,7 +132,7 @@
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/tv_anime_show_type"
-                            style="@style/TextSubtitle1"
+                            style="@style/TextSubtitle2.White.Bold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/anime_purple"
@@ -144,40 +144,37 @@
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/tv_anime_age_rating_guide"
-                            style="@style/TextSubtitle1"
+                            style="@style/TextSubtitle2.White.Bold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="4dp"
                             android:backgroundTint="@color/anime_purple"
                             android:checkable="false"
                             android:text="@{anime.attributes.ageRatingGuide}"
-                            android:textColor="@color/anime_white"
                             android:visibility="@{TextUtils.isEmpty(anime.attributes.ageRatingGuide) ? View.GONE :View.VISIBLE}"
                             tools:text="7세 이상" />
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/tv_anime_episode_count"
-                            style="@style/TextSubtitle1"
+                            style="@style/TextSubtitle2.White.Bold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="4dp"
                             android:backgroundTint="@color/anime_purple"
                             android:checkable="false"
-                            android:textColor="@color/anime_white"
                             android:visibility="@{TextUtils.isEmpty(anime.attributes.episodeCount.toString()) ? View.GONE : View.VISIBLE}"
                             app:episode="@{anime.attributes.episodeCount.toString()}"
                             tools:text="12화" />
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/tv_anime_status"
-                            style="@style/TextSubtitle1"
+                            style="@style/TextSubtitle2.White.Bold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="4dp"
                             android:backgroundTint="@color/anime_purple"
                             android:checkable="false"
                             android:text="@{anime.attributes.status}"
-                            android:textColor="@color/anime_white"
                             android:visibility="@{TextUtils.isEmpty(anime.attributes.status) ? View.GONE :View.VISIBLE}"
                             tools:text="방영중" />
 
@@ -235,11 +232,12 @@
                         android:nestedScrollingEnabled="false"
                         android:orientation="vertical"
                         app:adapter="@{review_adapter}"
+                        app:animeReviewList="@{vm.reviewList}"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:reviewList="@{vm.reviewList}" />
+                        tools:listitem="@layout/item_anime_review" />
 
                     <ProgressBar
                         android:id="@+id/review_loading_bar"

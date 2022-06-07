@@ -7,10 +7,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kenshi.animereview.R
-import com.kenshi.animereview.data.model.UserReview
+import com.kenshi.animereview.data.model.AnimeReview
 import com.kenshi.animereview.databinding.ItemAnimeReviewBinding
 
-class AnimeReviewAdapter: ListAdapter<UserReview, AnimeReviewAdapter.ReviewViewHolder>(diffCallback) {
+class AnimeReviewAdapter: ListAdapter<AnimeReview, AnimeReviewAdapter.ReviewViewHolder>(diffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReviewViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -26,7 +26,7 @@ class AnimeReviewAdapter: ListAdapter<UserReview, AnimeReviewAdapter.ReviewViewH
         private val binding: ItemAnimeReviewBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: UserReview) {
+        fun bind(item: AnimeReview) {
             binding.apply {
                 review = item
                 executePendingBindings()
@@ -35,12 +35,12 @@ class AnimeReviewAdapter: ListAdapter<UserReview, AnimeReviewAdapter.ReviewViewH
     }
 
     companion object {
-        private val diffCallback = object : DiffUtil.ItemCallback<UserReview>() {
+        private val diffCallback = object : DiffUtil.ItemCallback<AnimeReview>() {
 
-            override fun areItemsTheSame(oldItem: UserReview, newItem: UserReview): Boolean =
+            override fun areItemsTheSame(oldItem: AnimeReview, newItem: AnimeReview): Boolean =
                 oldItem.reviewId == newItem.reviewId
 
-            override fun areContentsTheSame(oldItem:UserReview, newItem: UserReview): Boolean =
+            override fun areContentsTheSame(oldItem:AnimeReview, newItem: AnimeReview): Boolean =
                 oldItem == newItem
         }
     }

@@ -34,10 +34,6 @@ class AnimeRepositoryImpl @Inject constructor(
     override fun fetchAnimeListById(): Flow<UiState<List<AnimeInfo>>> =
         flow<UiState<List<AnimeInfo>>> {
             var recommendAnimeList: MutableList<AnimeInfo> = mutableListOf()
-//            for(id in recommendAnimeIdList) {
-//                val response = animeService.fetchAnimeById(id)
-//                response.body()?.let { recommendAnimeList.add(it.Anime) }
-//            }
             val randomIndexList = getRandomNumber()
             Timber.tag("randomIndexList").d("$randomIndexList")
 
@@ -78,12 +74,6 @@ class AnimeRepositoryImpl @Inject constructor(
                 )
             }
 
-//            withContext(ioDispatcher) {
-//                for (id in recommendAnimeIdList) {
-//                    val response = async { animeService.fetchAnimeById(id) }
-//                    response.await().body()?.let { recommendAnimeList.add(it.Anime) }
-//                }
-//            }
             Timber.tag("recommendAnimeList").d("$recommendAnimeList")
             emit(UiState.Success(recommendAnimeList))
         }.catch { emit(UiState.Error(it)) }

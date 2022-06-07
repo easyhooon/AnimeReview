@@ -15,7 +15,7 @@ import com.google.firebase.ktx.Firebase
 import com.kenshi.animereview.data.model.AnimeInfo
 import com.kenshi.animereview.data.model.Review
 import com.kenshi.animereview.data.model.User
-import com.kenshi.animereview.data.model.UserReview
+import com.kenshi.animereview.data.model.AnimeReview
 import com.kenshi.animereview.ui.base.UiState
 import com.kenshi.animereview.ui.common.Event
 import com.kenshi.animereview.ui.common.hideKeyboard
@@ -35,7 +35,6 @@ class AnimeReviewViewModel: ViewModel() {
     private val currentUser by lazy {
         firebaseAuth.currentUser!!
     }
-
 
     private val _animeInfo = MutableStateFlow(AnimeInfo())
     val animeInfo: StateFlow<AnimeInfo> = _animeInfo.asStateFlow()
@@ -58,24 +57,25 @@ class AnimeReviewViewModel: ViewModel() {
         reviewText.value = ""
     }
 
-    val reviewList: StateFlow<UiState<List<UserReview>>> = fetchReviewList()
+    val reviewList: StateFlow<UiState<List<AnimeReview>>> = fetchReviewList()
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000L),
             initialValue = UiState.Loading
         )
 
-    private fun fetchReviewList(): Flow<UiState<List<UserReview>>> = flow<UiState<List<UserReview>>> {
+    //전체 리뷰 중에 해당 애니메이션의 리뷰를 가져오기
+    private fun fetchReviewList(): Flow<UiState<List<AnimeReview>>> = flow<UiState<List<AnimeReview>>> {
         emit(UiState.Loading)
         val reviewRef = db.collection(REVIEW_PATH)
         val userRef = db.collection(USER_PATH)
-        val userReviewList = mutableListOf<UserReview>()
+        val animeReviewList = mutableListOf<AnimeReview>()
         val reviewList =
             reviewRef.whereEqualTo("animeId", animeInfo.value.id).get().await().toObjects<Review>()
         for(review in reviewList) {
             val userInfo
                     = userRef.whereEqualTo("userId", review.userId).get().await().toObjects<User>()
-            userReviewList.add(UserReview(
+            animeReviewList.add(AnimeReview(
                 reviewId = review.reviewId,
                 animeId = review.animeId,
                 user = userInfo[0],
@@ -83,10 +83,10 @@ class AnimeReviewViewModel: ViewModel() {
                 reviewText = review.reviewText
             ))
         }
-        Timber.tag("fetch Success").d("$reviewList")
-        Timber.tag("fetch Success").d("$userReviewList")
-        //emit(UiState.Success(reviewList))
-        emit(UiState.Success(userReviewList))
+        Timber.tag("anime review fetch Success").d("$reviewList")
+        Timber.tag("anime review fetch Success").d("$animeReviewList")
+
+        emit(UiState.Success(animeReviewList))
     }
 
     fun registerReview() {

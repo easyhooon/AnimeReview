@@ -9,12 +9,13 @@ import com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
 import com.kenshi.animereview.GlideApp
 import com.kenshi.animereview.data.model.AnimeInfo
 import com.kenshi.animereview.data.model.MockAnimeInfo
-import com.kenshi.animereview.data.model.UserReview
+import com.kenshi.animereview.data.model.AnimeReview
 import com.kenshi.animereview.ui.anime_review.AnimeReviewAdapter
 import com.kenshi.animereview.ui.base.UiState
 import com.kenshi.animereview.ui.base.successOrNull
 import com.kenshi.animereview.ui.home.MockAnimeAdapter
 import com.kenshi.animereview.ui.home.RecommendAnimeAdapter
+import com.kenshi.animereview.ui.my.MyReviewAdapter
 import java.text.DecimalFormat
 
 
@@ -48,13 +49,22 @@ fun RecyclerView.bindAnimeList(animeList: UiState<List<AnimeInfo>>) {
 //    }
 //}
 
-@BindingAdapter("reviewList")
-fun RecyclerView.bindReviewList(userReviewList: UiState<List<UserReview>>) {
+@BindingAdapter("animeReviewList")
+fun RecyclerView.bindAnimeReviewList(animeReviewList: UiState<List<AnimeReview>>) {
     val boundAdapter = this.adapter
     if (boundAdapter is AnimeReviewAdapter) {
-        boundAdapter.submitList(userReviewList.successOrNull())
+        boundAdapter.submitList(animeReviewList.successOrNull())
     }
 }
+
+@BindingAdapter("myReviewList")
+fun RecyclerView.bindMyReviewList(animeReviewList: UiState<List<AnimeReview>>) {
+    val boundAdapter = this.adapter
+    if (boundAdapter is MyReviewAdapter) {
+        boundAdapter.submitList(animeReviewList.successOrNull())
+    }
+}
+
 
 @BindingAdapter("mockAnimeList")
 fun RecyclerView.bindMockAnimeList(animeList: MutableList<MockAnimeInfo>) {
@@ -96,20 +106,6 @@ fun TextView.bindText(rating: String?) {
     }
 }
 
-
-//@BindingAdapter("tags")
-//fun ChipGroup.bindTags(tags: List<String>?) {
-//    tags?.forEach { tag ->
-//        val tagView: Chip = Chip(context).apply {
-//            text = tag
-//            isCheckable = false
-//            isCloseIconVisible = false
-//            setChipBackgroundColorResource(R.color.purple)
-//            setTextAppearanceResource(R.style.TextStyle_Tag)
-//        }
-//        addView(tagView)
-//    }
-//}
 
 @BindingAdapter("tag")
 fun Chip.bindShow(text: String) {

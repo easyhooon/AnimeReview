@@ -10,7 +10,6 @@ import com.kenshi.animereview.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import com.kenshi.animereview.ui.common.EventObserver
 
-//TODO Chip BindingAdapter에 style 통일해서 반복되는 설정 줄이기
 @AndroidEntryPoint
 class AnimeDetailFragment: BaseFragment<FragmentAnimeDetailBinding>(R.layout.fragment_anime_detail) {
 

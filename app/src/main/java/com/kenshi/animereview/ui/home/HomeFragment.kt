@@ -24,7 +24,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private val viewModel: HomeViewModel by viewModels()
 
     //TODO ConcatAdapter 고민, viewtype 나누어 하나의 어댑터로..
-
 //    private val mockAnimeAdapter: MockAnimeAdapter by lazy {
 //        MockAnimeAdapter { animeInfo ->
 //            mockNavigateToDetail(animeInfo)
@@ -70,17 +69,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 //    }
 
     private fun navigateToDetail(animeInfo: AnimeInfo) {
-//        findNavController().navigate(
-////            R.id.action_navigation_home_to_animeDetailFragment, bundleOf(
-////                ANIME_INFO to animeInfo
-////            )
-//        )
-        val intent = Intent(requireActivity(), AnimationReviewActivity::class.java).apply{
-            Timber.d("$animeInfo")
-            putExtra(ANIME_INFO, animeInfo)
-        }
-        startActivity(intent)
-
-        //startActivity(Intent(this, AnimationReviewActivity::class.java))
+        startActivity(
+            Intent(requireActivity(), AnimationReviewActivity::class.java).apply {
+                Timber.d("$animeInfo")
+                putExtra(ANIME_INFO, animeInfo)
+            }
+        )
     }
 }

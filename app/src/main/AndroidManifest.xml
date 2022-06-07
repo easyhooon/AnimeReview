@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AnimeReview">
         <activity
-            android:name=".ui.anime_review.AnimationReviewActivity"
+            android:name=".ui.anime_review.AnimeReviewActivity"
             android:exported="false" />
         <activity
             android:name=".ui.login.LoginActivity"

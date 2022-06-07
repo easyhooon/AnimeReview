@@ -20,10 +20,10 @@ class AnimeDetailFragment: BaseFragment<FragmentAnimeDetailBinding>(R.layout.fra
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.setAnimeInfo(viewModel.animeInfo.value)
+        //viewModel.setAnimeInfo(viewModel.animeInfo.value)
 
         bind {
-            anime = viewModel.animeInfo.value
+            anime = viewModel.animeInfo
             reviewAdapter = animeReviewAdapter
             vm = viewModel
         }

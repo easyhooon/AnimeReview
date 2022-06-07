@@ -8,7 +8,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.kenshi.animereview.R
 import com.kenshi.animereview.data.model.AnimeInfo
 import com.kenshi.animereview.databinding.FragmentHomeBinding
-import com.kenshi.animereview.ui.anime_review.AnimationReviewActivity
+import com.kenshi.animereview.ui.anime_review.AnimeReviewActivity
 import com.kenshi.animereview.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -70,7 +70,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private fun navigateToDetail(animeInfo: AnimeInfo) {
         startActivity(
-            Intent(requireActivity(), AnimationReviewActivity::class.java).apply {
+            Intent(requireActivity(), AnimeReviewActivity::class.java).apply {
                 Timber.d("$animeInfo")
                 putExtra(ANIME_INFO, animeInfo)
             }

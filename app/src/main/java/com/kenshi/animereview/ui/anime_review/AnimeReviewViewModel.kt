@@ -3,10 +3,7 @@ package com.kenshi.animereview.ui.anime_review
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -22,12 +19,19 @@ import com.kenshi.animereview.ui.common.hideKeyboard
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.tasks.await
 import timber.log.Timber
+import java.lang.IllegalStateException
+import javax.inject.Inject
 
-class AnimeReviewViewModel: ViewModel() {
+class AnimeReviewViewModel @Inject constructor(
+    savedStateHandle: SavedStateHandle
+): ViewModel() {
 
     private val REVIEW_PATH = "reviews"
     private val USER_PATH = "users"
     private var db = FirebaseFirestore.getInstance()
+
+    val animeInfo: AnimeInfo = savedStateHandle.get(AnimeReviewActivity.ANIME_INFO)
+        ?: throw IllegalStateException("There is no value of the animeInfo.")
 
     private val firebaseAuth: FirebaseAuth by lazy {
         Firebase.auth
@@ -35,9 +39,6 @@ class AnimeReviewViewModel: ViewModel() {
     private val currentUser by lazy {
         firebaseAuth.currentUser!!
     }
-
-    private val _animeInfo = MutableStateFlow(AnimeInfo())
-    val animeInfo: StateFlow<AnimeInfo> = _animeInfo.asStateFlow()
 
     private val _review = MutableStateFlow<Review>(Review())
     val review: StateFlow<Review> = _review.asStateFlow()
@@ -71,7 +72,7 @@ class AnimeReviewViewModel: ViewModel() {
         val userRef = db.collection(USER_PATH)
         val animeReviewList = mutableListOf<AnimeReview>()
         val reviewList =
-            reviewRef.whereEqualTo("animeId", animeInfo.value.id).get().await().toObjects<Review>()
+            reviewRef.whereEqualTo("animeId", animeInfo.id).get().await().toObjects<Review>()
         for(review in reviewList) {
             val userInfo
                     = userRef.whereEqualTo("userId", review.userId).get().await().toObjects<User>()
@@ -95,7 +96,7 @@ class AnimeReviewViewModel: ViewModel() {
 
         val reviewInfo = Review(
             refId,
-            _animeInfo.value.id,
+            animeInfo.id,
             currentUser.uid,
             _rating.value.toString(),
             reviewText.value
@@ -122,10 +123,6 @@ class AnimeReviewViewModel: ViewModel() {
 
     fun setRating(rating: Float) {
         _rating.value = rating
-    }
-
-    fun setAnimeInfo(animeInfo: AnimeInfo) {
-        _animeInfo.value = animeInfo
     }
 
     //bindingAdapter 로 해결한것은 아니지만 우선 기능 구현

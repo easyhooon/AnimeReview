@@ -13,23 +13,13 @@ import com.kenshi.animereview.ui.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AnimationReviewActivity : BaseActivity<ActivityAnimationReviewBinding>(R.layout.activity_animation_review) {
+class AnimeReviewActivity : BaseActivity<ActivityAnimationReviewBinding>(R.layout.activity_animation_review) {
 
     private val viewModel: AnimeReviewViewModel by viewModels()
     private lateinit var navController: NavController
 
-    lateinit var animeInfo: AnimeInfo
-
-    companion object {
-        const val ANIME_INFO = "animeInfo"
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        intent.apply {
-            animeInfo = getParcelableExtra(ANIME_INFO)!!
-        }
-        viewModel.setAnimeInfo(animeInfo)
 
         initNavigation()
     }
@@ -39,4 +29,9 @@ class AnimationReviewActivity : BaseActivity<ActivityAnimationReviewBinding>(R.l
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.findNavController()
     }
+
+    companion object {
+        const val ANIME_INFO = "animeInfo"
+    }
+
 }

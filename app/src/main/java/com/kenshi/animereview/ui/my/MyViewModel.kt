@@ -38,10 +38,6 @@ class MyViewModel @Inject constructor(
         firebaseAuth.currentUser!!
     }
 
-    //초기값에 의해 화면이 빈 칸으로만 채워지는 현상
-//    private val _user = MutableStateFlow<User>(User())
-//    val user:StateFlow<User> = _user.asStateFlow()
-
     private val _reviews = MutableLiveData<List<Review>>()
     val reviews: LiveData<List<Review>> = _reviews
 
@@ -63,19 +59,6 @@ class MyViewModel @Inject constructor(
             initialValue = UiState.Loading
         )
 
-//    fun fetchUserInfo(): Flow<UiState<User>> = flow<UiState<User>> {
-//        emit(UiState.Loading)
-//        val userRef = db.collection(USER_PATH).document(currentUser.uid)
-//        userRef.get()
-//            .addOnSuccessListener { documentSnapshot ->
-//                _user.value = documentSnapshot.toObject<User>()!!
-//                Timber.tag("fetch Success").d("${_user.value}")
-//            }
-//            .addOnFailureListener {
-//                Timber.d("fetch Fail")
-//            }
-//    }
-
     private fun fetchUserInfo(): Flow<UiState<User>> = flow<UiState<User>> {
         val userRef = db.collection(USER_PATH).document(currentUser.uid)
         val userInfo = userRef.get().await().toObject<User>()!!
@@ -83,7 +66,7 @@ class MyViewModel @Inject constructor(
         emit(UiState.Success(userInfo))
     }
 
-    // 이런식으로 반복되는거 보면 usecase의 필요성이 느껴지긴 한다.
+    // 이런식으로 반복되는거 보면 UseCase 의 필요성이 느껴지긴 한다.
     val reviewList: StateFlow<UiState<List<AnimeReview>>> = fetchReviewList()
         .stateIn(
             scope = viewModelScope,

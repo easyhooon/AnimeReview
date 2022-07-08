@@ -34,7 +34,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:shapeAppearance="@style/Circle"
-                tools:src="@drawable/ic_baseline_person_24" />
+                tools:src="@drawable/ic_person_24" />
 
             <TextView
                 android:id="@+id/tv_user_display_name"
@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="12dp"
                 android:text="@{review.rating}"
-                app:chipIcon="@drawable/ic_baseline_star_rate_24"
+                app:chipIcon="@drawable/ic_star_rate_24"
                 app:layout_constraintBottom_toBottomOf="@id/view_divider_anime_title"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

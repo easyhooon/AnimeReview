@@ -8,7 +8,7 @@ import com.kenshi.animereview.R
 import com.kenshi.animereview.databinding.FragmentAnimeDetailBinding
 import com.kenshi.animereview.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
-import com.kenshi.animereview.ui.common.EventObserver
+import com.kenshi.animereview.common.EventObserver
 
 @AndroidEntryPoint
 class AnimeDetailFragment: BaseFragment<FragmentAnimeDetailBinding>(R.layout.fragment_anime_detail) {
@@ -34,6 +34,7 @@ class AnimeDetailFragment: BaseFragment<FragmentAnimeDetailBinding>(R.layout.fra
 
 
     private fun initNavigation() {
+        //툴바 뒤로가기 버튼
         binding.tbAnimeDetail.setOnClickListener{
             if(!findNavController().navigateUp())
                 requireActivity().finish()

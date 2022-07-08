@@ -4,7 +4,7 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-class Anime(
+class JikanAnimeList (
     @field:Json(name = "data")
-    val Anime: AnimeInfo,
+    val jikanAimeList: List<JikanAnimeInfo>
 )

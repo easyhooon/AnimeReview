@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import com.google.firebase.auth.FirebaseAuth
 import com.kenshi.animereview.R
 import com.kenshi.animereview.data.model.AnimeInfo
+import com.kenshi.animereview.data.model.JikanAnimeInfo
 import com.kenshi.animereview.databinding.FragmentHomeBinding
 import com.kenshi.animereview.ui.anime_review.AnimeReviewActivity
 import com.kenshi.animereview.ui.base.BaseFragment
@@ -36,9 +37,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         }
     }
 
-    private val genreAnimeAdapter: RecommendAnimeAdapter by lazy {
+    private val trendingAnimeAdapter: RecommendAnimeAdapter by lazy {
         RecommendAnimeAdapter { animeInfo ->
             navigateToDetail(animeInfo)
+        }
+    }
+
+    private val genreAnimeAdapter: GenreAnimeAdapter by lazy {
+        GenreAnimeAdapter { animeInfo ->
+            //navigateToDetail(animeInfo)
         }
     }
 
@@ -56,6 +63,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             vm = viewModel
 //            mockAdapter = mockAnimeAdapter
             recommendAdapter = recommendAnimeAdapter
+            trendingAdapter = trendingAnimeAdapter
             genreAdapter = genreAnimeAdapter
         }
     }
@@ -68,6 +76,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 //        )
 //    }
 
+    //이러면 똑같은 화면이 데이터만 바껴서 두개가 만들어짐
     private fun navigateToDetail(animeInfo: AnimeInfo) {
         startActivity(
             Intent(requireActivity(), AnimeReviewActivity::class.java).apply {

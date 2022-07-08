@@ -8,7 +8,6 @@ import com.kenshi.animereview.domain.repository.ReviewRepository
 import javax.inject.Inject
 
 class ReviewRepositoryImpl @Inject constructor(
-    private val reviewService: FirebaseReviewService,
 ): ReviewRepository {
     override fun saveReview(anime: Review) {
 

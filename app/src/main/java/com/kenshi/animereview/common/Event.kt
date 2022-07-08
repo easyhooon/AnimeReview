@@ -1,4 +1,4 @@
-package com.kenshi.animereview.ui.common
+package com.kenshi.animereview.common
 
 import androidx.lifecycle.Observer
 

@@ -1,4 +1,4 @@
-package com.kenshi.animereview.ui.common
+package com.kenshi.animereview.common
 
 import android.view.View
 import android.widget.*
@@ -10,9 +10,11 @@ import com.kenshi.animereview.GlideApp
 import com.kenshi.animereview.data.model.AnimeInfo
 import com.kenshi.animereview.data.model.MockAnimeInfo
 import com.kenshi.animereview.data.model.AnimeReview
+import com.kenshi.animereview.data.model.JikanAnimeInfo
 import com.kenshi.animereview.ui.anime_review.AnimeReviewAdapter
 import com.kenshi.animereview.ui.base.UiState
 import com.kenshi.animereview.ui.base.successOrNull
+import com.kenshi.animereview.ui.home.GenreAnimeAdapter
 import com.kenshi.animereview.ui.home.MockAnimeAdapter
 import com.kenshi.animereview.ui.home.RecommendAnimeAdapter
 import com.kenshi.animereview.ui.my.MyReviewAdapter
@@ -37,6 +39,14 @@ fun RecyclerView.bindAdapter(adapter: RecyclerView.Adapter<*>) {
 fun RecyclerView.bindAnimeList(animeList: UiState<List<AnimeInfo>>) {
     val boundAdapter = this.adapter
     if (boundAdapter is RecommendAnimeAdapter) {
+        boundAdapter.submitList(animeList.successOrNull())
+    }
+}
+
+@BindingAdapter("genreAnimeList")
+fun RecyclerView.bindGenreAnimeList(animeList: UiState<List<JikanAnimeInfo>>) {
+    val boundAdapter = this.adapter
+    if (boundAdapter is GenreAnimeAdapter) {
         boundAdapter.submitList(animeList.successOrNull())
     }
 }

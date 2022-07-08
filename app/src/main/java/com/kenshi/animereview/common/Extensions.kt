@@ -1,6 +1,5 @@
-package com.kenshi.animereview.ui.common
+package com.kenshi.animereview.common
 
-import android.app.Activity
 import android.content.Context
 import android.content.res.Resources
 import android.util.TypedValue

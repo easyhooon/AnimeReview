@@ -2,6 +2,7 @@ package com.kenshi.animereview.data.network.service
 
 import com.kenshi.animereview.data.model.Anime
 import com.kenshi.animereview.data.model.AnimeList
+import com.kenshi.animereview.data.model.JikanAnimeList
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -17,11 +18,9 @@ interface AnimeService {
         @Path("id") id: String
     ): Response<Anime>
 
-    // 장르 검색
-    @GET("anime")
-    suspend fun fetchCategoryAnime(
-        @Query("filter[categories]") category: String,
-    ): Response<AnimeList>
+    @GET("trending/anime")
+    suspend fun fetchTrendingAnime(): Response<AnimeList>
+
 
     // 제목 검색
     @GET("anime")

@@ -5,16 +5,16 @@ import com.kenshi.animereview.data.network.RequestDebugInterceptor
 import com.kenshi.animereview.data.network.service.AnimeService
 import com.kenshi.animereview.data.network.service.FirebaseReviewService
 import com.kenshi.animereview.data.network.service.FirebaseUserService
+import com.kenshi.animereview.data.network.service.JikanAnimeService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -58,32 +58,39 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(
+    @Named("Kitsu")
+    fun provideKitsuRetrofit(
         okHttpClient: OkHttpClient
     ):  Retrofit {
         return Retrofit.Builder().apply {
-            baseUrl(BuildConfig.ANIME_API_BASE_URL)
+            baseUrl(BuildConfig.KITSU_ANIME_API_BASE_URL)
             client(okHttpClient)
-            addConverterFactory(GsonConverterFactory.create())
-            //addConverterFactory(MoshiConverterFactory.create())
+            addConverterFactory(MoshiConverterFactory.create())
         }.build()
     }
 
     @Provides
     @Singleton
-    fun provideAnimeService(retrofit: Retrofit): AnimeService {
+    @Named("Jikan")
+    fun provideJikanRetrofit(
+        okHttpClient: OkHttpClient
+    ):  Retrofit {
+        return Retrofit.Builder().apply {
+            baseUrl(BuildConfig.JIKAN_ANIME_API_BASE_URL)
+            client(okHttpClient)
+            addConverterFactory(MoshiConverterFactory.create())
+        }.build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideKitsuAnimeService(@Named("Kitsu")retrofit: Retrofit): AnimeService {
         return retrofit.create(AnimeService::class.java)
     }
 
-//    @Provides
-//    @Singleton
-//    fun provideFirebaseReviewService(): FirebaseReviewService {
-//        return
-//    }
-
-//    @Provides
-//    @Singleton
-//    fun provideFirebaseUserService(): FirebaseUserService {
-//        return
-//    }
+    @Provides
+    @Singleton
+    fun provideJikanAnimeService(@Named("Jikan")retrofit: Retrofit): JikanAnimeService {
+        return retrofit.create(JikanAnimeService::class.java)
+    }
 }

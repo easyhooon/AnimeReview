@@ -30,6 +30,8 @@ class AnimeReviewActivity : BaseActivity<ActivityAnimationReviewBinding>(R.layou
         navController = navHostFragment.findNavController()
     }
 
+
+
     companion object {
         const val ANIME_INFO = "animeInfo"
     }

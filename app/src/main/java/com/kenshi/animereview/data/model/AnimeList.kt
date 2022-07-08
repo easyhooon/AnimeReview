@@ -1,8 +1,10 @@
 package com.kenshi.animereview.data.model
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 class AnimeList (
-    @SerializedName("data")
-    val AnimeList: List<AnimeInfo>
+    @field:Json(name = "data")
+    val animeList: List<AnimeInfo>
 )

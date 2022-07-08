@@ -75,7 +75,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:shapeAppearanceOverlay="@style/RoundedBig"
-                    tools:src="@drawable/ic_baseline_home_24" />
+                    tools:src="@drawable/ic_home_24" />
                 <!--    width 를 기준으로 1:1 비율-->
 
                 <com.google.android.material.imageview.ShapeableImageView
@@ -83,7 +83,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:src="@drawable/ic_baseline_star_rate_24"
+                    android:src="@drawable/ic_star_rate_24"
                     android:visibility="@{TextUtils.isEmpty(anime.attributes.averageRating) ? View.GONE :View.VISIBLE}"
                     app:layout_constraintStart_toStartOf="@id/iv_anime_cover_image"
                     app:layout_constraintTop_toBottomOf="@id/iv_anime_cover_image" />
@@ -195,14 +195,17 @@
                 <TextView
                     android:id="@+id/tv_anime_synopsis"
                     style="@style/TextSubtitle3"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="12dp"
+                    android:layout_marginEnd="16dp"
                     android:visibility="@{TextUtils.isEmpty(anime.attributes.synopsis) ? View.GONE :View.VISIBLE}"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/view_divider_anime_synopsis"
-                    app:text="@{anime.attributes.synopsis}" />
+                    app:text="@{anime.attributes.synopsis}"
+                    tools:text="내용" />
 
                 <View
                     android:id="@+id/view_divider_anime_review"

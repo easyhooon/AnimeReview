@@ -5,7 +5,8 @@
     <data>
         <variable
             name="anime"
-            type="com.kenshi.animereview.data.model.AnimeInfo" />
+            type="com.kenshi.animereview.data.model.JikanAnimeInfo" />
+
     </data>
 
 
@@ -20,7 +21,7 @@
             android:layout_width="160dp"
             android:layout_height="240dp"
             android:scaleType="fitXY"
-            imageUrl="@{anime.attributes.posterImage.medium}" />
+            imageUrl="@{anime.images.webp.imageUrl}" />
 
     </com.jackandphantom.carouselrecyclerview.view.ReflectionViewContainer>
 </layout>

@@ -6,6 +6,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.kenshi.animereview.data.model.AnimeInfo
+import com.kenshi.animereview.data.model.JikanAnimeInfo
 import com.kenshi.animereview.domain.repository.AnimeRepository
 import com.kenshi.animereview.ui.base.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -33,7 +34,14 @@ class HomeViewModel @Inject constructor(
             initialValue = UiState.Loading
         )
 
-    val genreAnimeList: StateFlow<UiState<List<AnimeInfo>>> = animeRepository.fetchCategoryAnime("adventure")
+    val trendingAnimeList: StateFlow<UiState<List<AnimeInfo>>> = animeRepository.fetchTrendingAnime()
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000L),
+            initialValue = UiState.Loading
+        )
+
+    val genreAnimeList: StateFlow<UiState<List<JikanAnimeInfo>>> = animeRepository.fetchGenreAnime("action")
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000L),

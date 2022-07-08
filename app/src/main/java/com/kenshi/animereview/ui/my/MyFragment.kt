@@ -7,7 +7,7 @@ import com.kenshi.animereview.R
 import com.kenshi.animereview.databinding.FragmentMyBinding
 import com.kenshi.animereview.ui.base.BaseFragment
 import com.kenshi.animereview.ui.base.successOrNull
-import com.kenshi.animereview.ui.common.collectLatestLifecycleFlow
+import com.kenshi.animereview.common.collectLatestLifecycleFlow
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 

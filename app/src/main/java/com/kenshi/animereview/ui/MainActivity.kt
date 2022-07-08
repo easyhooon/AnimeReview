@@ -1,4 +1,4 @@
-package com.kenshi.animereview.ui.home
+package com.kenshi.animereview.ui
 
 import android.os.Bundle
 import androidx.activity.viewModels

@@ -6,10 +6,11 @@ import kotlinx.parcelize.Parcelize
 import timber.log.Timber
 
 @Parcelize
-data class User(val userId: String? = "", //Document ID is actually the user id
-                val name: String? = "",
-                val email: String? = "",
-                val profileImageUrl: String? = "") : Parcelable {
+data class User(
+    val userId: String? = "", //Document ID is actually the user id
+    val name: String? = "",
+    val email: String? = "",
+    val profileImageUrl: String? = "") : Parcelable {
 
     companion object {
         fun DocumentSnapshot.toUser(): User? {

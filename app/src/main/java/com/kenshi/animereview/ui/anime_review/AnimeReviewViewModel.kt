@@ -14,8 +14,8 @@ import com.kenshi.animereview.data.model.Review
 import com.kenshi.animereview.data.model.User
 import com.kenshi.animereview.data.model.AnimeReview
 import com.kenshi.animereview.ui.base.UiState
-import com.kenshi.animereview.ui.common.Event
-import com.kenshi.animereview.ui.common.hideKeyboard
+import com.kenshi.animereview.common.Event
+import com.kenshi.animereview.common.hideKeyboard
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.tasks.await
 import timber.log.Timber
@@ -84,8 +84,6 @@ class AnimeReviewViewModel @Inject constructor(
                 reviewText = review.reviewText
             ))
         }
-        Timber.tag("anime review fetch Success").d("$reviewList")
-        Timber.tag("anime review fetch Success").d("$animeReviewList")
 
         emit(UiState.Success(animeReviewList))
     }

@@ -1,6 +1,5 @@
 package com.kenshi.animereview.ui.anime_review
 
-import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.lifecycle.*
@@ -9,17 +8,16 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
+import com.kenshi.animereview.common.Event
+import com.kenshi.animereview.common.hideKeyboard
+import com.kenshi.animereview.data.model.AnimeReview
 import com.kenshi.animereview.data.model.KitsuAnimeInfo
 import com.kenshi.animereview.data.model.Review
 import com.kenshi.animereview.data.model.User
-import com.kenshi.animereview.data.model.AnimeReview
 import com.kenshi.animereview.ui.base.UiState
-import com.kenshi.animereview.common.Event
-import com.kenshi.animereview.common.hideKeyboard
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.tasks.await
 import timber.log.Timber
-import java.lang.IllegalStateException
 import javax.inject.Inject
 
 class AnimeReviewViewModel @Inject constructor(
@@ -122,7 +120,7 @@ class AnimeReviewViewModel @Inject constructor(
     }
 
     //bindingAdapter 로 해결한것은 아니지만 우선 기능 구현
-    fun onDoneClicked(view: View, actionId: Int, event: KeyEvent?): Boolean {
+    fun onDoneClicked(view: View, actionId: Int): Boolean {
         if(actionId == EditorInfo.IME_ACTION_DONE) {
             view.hideKeyboard()
             return true
@@ -130,6 +128,22 @@ class AnimeReviewViewModel @Inject constructor(
         return false
     }
 
+//    private val _eventFlow = MutableSharedFlow<Event>()
+//    val eventFlow = _eventFlow.asSharedFlow()
+//
+//    private fun event(event: Event) = viewModelScope.launch {
+//        _eventFlow.emit(event)
+//    }
+//
+//
+//    fun backIconClick() = viewModelScope.launch {
+//        event(Event.BackIconClick)
+//    }
+//
+//    sealed class Event {
+//        object BackIconClick : Event()
+//    }
+//
     companion object {
         private const val REVIEW_PATH = "reviews"
         private const val USER_PATH = "users"

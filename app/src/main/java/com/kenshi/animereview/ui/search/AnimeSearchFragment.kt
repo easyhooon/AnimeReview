@@ -32,12 +32,11 @@ class AnimeSearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragmen
         }
 
         initView()
+        // initNavigation()
 
-        initNavigation()
-
-//        repeatOnStarted {
-//            viewModel.eventFlow.collect { event -> handleEvent(event) }
-//        }
+        repeatOnStarted {
+            viewModel.eventFlow.collect { event -> handleEvent(event) }
+        }
     }
 
     private fun initView() = with(binding) {
@@ -53,13 +52,12 @@ class AnimeSearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragmen
         }
     }
 
-    private fun initNavigation() {
-        binding.tbAnimeSearch.setOnClickListener {
-            if (!findNavController().navigateUp())
-                requireActivity().finish()
-            else
-                findNavController().navigateUp()
-        }
-
-    }
+//    private fun initNavigation() {
+//        binding.tbAnimeSearch.setOnClickListener {
+//            if (!findNavController().navigateUp())
+//                requireActivity().finish()
+//            else
+//                findNavController().navigateUp()
+//        }
+//    }
 }

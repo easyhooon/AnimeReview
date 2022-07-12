@@ -3,10 +3,15 @@
     <string name="title_home">홈</string>
     <string name="title_review">리뷰</string>
     <string name="description_home_recommend_anime_image">홈화면 추천 애니 이미지</string>
-    <string name="search">검색</string>
+    <string name="search">검색하기</string>
     <string name="user_recommend_animation">%s님을 위한 추천 애니메이션</string>
+    <string name="trending_animation">인기 애니메이션</string>
     <string name="genre_animation_adventure">장르별 애니메이션: 어드벤처</string>
+    <string name="genre_animation_action">장르별 애니메이션: 액션</string>
     <string name="write_review">리뷰 작성</string>
     <string name="rating">Rating</string>
     <string name="register">등록</string>
+    <string name="search_">제목으로 검색</string>
+    <string name="retry">새로고침</string>
+    <string name="no_result">결과없음</string>
 </resources>

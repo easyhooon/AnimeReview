@@ -1,49 +1,40 @@
 package com.kenshi.animereview.data.model
 
 import android.os.Parcelable
+import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import kotlinx.parcelize.Parcelize
-
 
 @Parcelize
 @JsonClass(generateAdapter = true)
 data class AnimeInfo(
-    val id: String = "",
-    val attributes: Attributes? = null,
+    @field:Json(name = "mal_id")
+    val id: String? = null,
+    val images: Image? = null,
+    val title: String? = null,
+    val type: String? = null,
+    val episodes: Int? = 0,
+    val status: String? = "",
+    val rating: String? = "",
+    val score: Float? = 0F,
+    val synopsis: String? = "",
 ) : Parcelable {
 
     @Parcelize
     @JsonClass(generateAdapter = true)
-    data class Attributes(
-        val ageRatingGuide: String?,
-        val averageRating: String?,
-        val canonicalTitle: String?,
-        val coverImage: CoverImage?,
-        val episodeCount: Int?,
-        val posterImage: PosterImage?,
-        val synopsis: String?,
-        val episodeLength: Int?,
-        val showType: String?,
-        val status: String?,
+    data class Image(
+        val webp: Webp? = null,
     ) : Parcelable {
 
         @Parcelize
         @JsonClass(generateAdapter = true)
-        data class CoverImage(
-            val large: String?,
-            val original: String?,
-            val small: String?,
-            val tiny: String?,
-        ) : Parcelable
-
-        @Parcelize
-        @JsonClass(generateAdapter = true)
-        data class PosterImage(
-            val large: String?,
-            val medium: String?,
-            val original: String?,
-            val small: String?,
-            val tiny: String?,
+        data class Webp(
+            @field:Json(name = "image_url")
+            val imageUrl: String? = null,
+            @field:Json(name = "small_image_url")
+            val smallImageUrl: String? = null,
+            @field:Json(name = "large_image_url")
+            val largeImageUrl: String? = null,
         ) : Parcelable
     }
 
@@ -53,57 +44,45 @@ data class AnimeInfo(
 }
 
 //@Parcelize
-//data class AnimeInfo(
-//    @SerializedName("id")
+//data class JikanAnimeInfo(
+//    @SerializedName("mal_id")
 //    val id: String? = null,
-//    @SerializedName("attributes")
-//    val attributes: Attributes? = null,
+//    @SerializedName("images")
+//    val images: Image? = null,
+//    @SerializedName("title")
+//    val title: String? = null,
+//    @SerializedName("type")
+//    val type: String? = null,
+//    @SerializedName("episodes")
+//    val episodes: Int? = 0,
+//    @SerializedName("status")
+//    val status: String? = "",
+//    @SerializedName("rating")
+//    val rating: String? = "",
+//    @SerializedName("score")
+//    val score: Float? = 0F,
+//    @SerializedName("synopsis")
+//    val synopsis: String? = ""
 //) : Parcelable {
 //
 //    @Parcelize
-//    data class Attributes(
-//        @SerializedName("ageRatingGuide")
-//        val ageRatingGuide: String?,
-//        @SerializedName("averageRating")
-//        val averageRating: String?,
-//        @SerializedName("canonicalTitle")
-//        val canonicalTitle: String?,
-//        @SerializedName("coverImage")
-//        val coverImage: CoverImage?,
-//        @SerializedName("episodeCount")
-//        val episodeCount: Int?,
-//        @SerializedName("posterImage")
-//        val posterImage: PosterImage?,
-//        @SerializedName("synopsis")
-//        val synopsis: String?,
-//        @SerializedName("showType")
-//        val showType: String?,
-//        @SerializedName("status")
-//        val status: String?,
+//    data class Image(
+//        @SerializedName("webp")
+//        val webp: Webp? = null
 //    ) : Parcelable {
 //
-//        @Parcelize
-//        data class CoverImage(
-//            @SerializedName("large")
-//            val large: String?,
-//            @SerializedName("small")
-//            val small: String?,
-//        ) : Parcelable
-//
-//        @Parcelize
-//        data class PosterImage(
-//            @SerializedName("large")
-//            val large: String?,
-//            @SerializedName("small")
-//            val small: String?,
-//            @SerializedName("medium")
-//            val medium: String?,
-//            @SerializedName("original")
-//            val original: String?
-//        ) : Parcelable
+//       @Parcelize
+//       data class Webp (
+//           @SerializedName("image_url")
+//           val imageUrl: String? = null,
+//           @SerializedName("small_image_url")
+//           val smallImageUrl: String? = null,
+//           @SerializedName("large_image_url")
+//           val largeImageUrl: String? = null,
+//       ) : Parcelable
 //    }
 //
 //    companion object {
-//        val EMPTY = AnimeInfo()
+//        val EMPTY = JikanAnimeInfo()
 //    }
 //}

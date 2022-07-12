@@ -7,13 +7,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kenshi.animereview.R
-import com.kenshi.animereview.data.model.JikanAnimeInfo
+import com.kenshi.animereview.data.model.AnimeInfo
 import com.kenshi.animereview.databinding.ItemGenreAnimeBinding
-import com.kenshi.animereview.databinding.ItemRecommendAnimeBinding
 
 class GenreAnimeAdapter(
-    private val whenItemClicked: (JikanAnimeInfo) -> Unit
-) : ListAdapter<JikanAnimeInfo, GenreAnimeAdapter.GenreAnimeViewHolder>(diffCallback) {
+    private val whenItemClicked: (AnimeInfo) -> Unit
+) : ListAdapter<AnimeInfo, GenreAnimeAdapter.GenreAnimeViewHolder>(diffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GenreAnimeViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -37,7 +36,7 @@ class GenreAnimeAdapter(
         private val binding: ItemGenreAnimeBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: JikanAnimeInfo) {
+        fun bind(item: AnimeInfo) {
             binding.apply {
                 anime = item
                 executePendingBindings()
@@ -46,11 +45,11 @@ class GenreAnimeAdapter(
     }
 
     companion object {
-        private val diffCallback = object : DiffUtil.ItemCallback<JikanAnimeInfo>() {
-            override fun areItemsTheSame(oldItem: JikanAnimeInfo, newItem: JikanAnimeInfo): Boolean =
+        private val diffCallback = object : DiffUtil.ItemCallback<AnimeInfo>() {
+            override fun areItemsTheSame(oldItem: AnimeInfo, newItem: AnimeInfo): Boolean =
                 oldItem.id == newItem.id
 
-            override fun areContentsTheSame(oldItem: JikanAnimeInfo, newItem: JikanAnimeInfo): Boolean =
+            override fun areContentsTheSame(oldItem: AnimeInfo, newItem: AnimeInfo): Boolean =
                 oldItem == newItem
         }
     }

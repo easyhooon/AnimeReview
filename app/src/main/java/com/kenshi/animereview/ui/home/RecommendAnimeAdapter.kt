@@ -8,18 +8,28 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kenshi.animereview.R
 import com.kenshi.animereview.data.model.AnimeInfo
+import com.kenshi.animereview.data.model.KitsuAnimeInfo
 import com.kenshi.animereview.databinding.ItemRecommendAnimeBinding
 
+//class RecommendAnimeAdapter(
+//    private val whenItemClicked: (KitsuAnimeInfo) -> Unit
+//) : ListAdapter<KitsuAnimeInfo, RecommendAnimeAdapter.RecommendAnimeViewHolder>(diffCallback) {
+
 class RecommendAnimeAdapter(
-    private val whenItemClicked: (AnimeInfo) -> Unit
+    private val whenItemClicked: (AnimeInfo) -> Unit,
 ) : ListAdapter<AnimeInfo, RecommendAnimeAdapter.RecommendAnimeViewHolder>(diffCallback) {
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecommendAnimeViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = DataBindingUtil.inflate<ItemRecommendAnimeBinding>(layoutInflater, R.layout.item_recommend_anime, parent, false)
+        val binding = DataBindingUtil.inflate<ItemRecommendAnimeBinding>(layoutInflater,
+            R.layout.item_recommend_anime,
+            parent,
+            false)
         return RecommendAnimeViewHolder(binding).apply {
             binding.root.setOnClickListener {
-                val position = bindingAdapterPosition.takeIf { it != RecyclerView.NO_POSITION } ?: return@setOnClickListener
+                val position = bindingAdapterPosition.takeIf { it != RecyclerView.NO_POSITION }
+                    ?: return@setOnClickListener
 
                 whenItemClicked(
                     getItem(position)
@@ -36,6 +46,12 @@ class RecommendAnimeAdapter(
         private val binding: ItemRecommendAnimeBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
 
+//        fun bind(item: KitsuAnimeInfo) {
+//            binding.apply {
+//                anime = item
+//                executePendingBindings()
+//            }
+//        }
         fun bind(item: AnimeInfo) {
             binding.apply {
                 anime = item
@@ -44,12 +60,33 @@ class RecommendAnimeAdapter(
         }
     }
 
+    //    companion object {
+//        private val diffCallback = object : DiffUtil.ItemCallback<KitsuAnimeInfo>() {
+//            override fun areItemsTheSame(
+//                oldItem: KitsuAnimeInfo,
+//                newItem: KitsuAnimeInfo,
+//            ): Boolean =
+//                oldItem.id == newItem.id
+//
+//            override fun areContentsTheSame(
+//                oldItem: KitsuAnimeInfo,
+//                newItem: KitsuAnimeInfo,
+//            ): Boolean =
+//                oldItem == newItem
+//        }
+//    }
     companion object {
         private val diffCallback = object : DiffUtil.ItemCallback<AnimeInfo>() {
-            override fun areItemsTheSame(oldItem: AnimeInfo, newItem: AnimeInfo): Boolean =
+            override fun areItemsTheSame(
+                oldItem: AnimeInfo,
+                newItem: AnimeInfo,
+            ): Boolean =
                 oldItem.id == newItem.id
 
-            override fun areContentsTheSame(oldItem:AnimeInfo, newItem: AnimeInfo): Boolean =
+            override fun areContentsTheSame(
+                oldItem: AnimeInfo,
+                newItem: AnimeInfo,
+            ): Boolean =
                 oldItem == newItem
         }
     }

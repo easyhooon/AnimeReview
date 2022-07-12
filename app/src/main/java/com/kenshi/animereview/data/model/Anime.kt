@@ -6,5 +6,5 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 class Anime(
     @field:Json(name = "data")
-    val Anime: AnimeInfo,
+    val anime: AnimeInfo,
 )

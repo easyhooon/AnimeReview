@@ -2,10 +2,8 @@ package com.kenshi.animereview.di
 
 import com.kenshi.animereview.BuildConfig
 import com.kenshi.animereview.data.network.RequestDebugInterceptor
+import com.kenshi.animereview.data.network.service.KitsuAnimeService
 import com.kenshi.animereview.data.network.service.AnimeService
-import com.kenshi.animereview.data.network.service.FirebaseReviewService
-import com.kenshi.animereview.data.network.service.FirebaseUserService
-import com.kenshi.animereview.data.network.service.JikanAnimeService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -84,13 +82,13 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideKitsuAnimeService(@Named("Kitsu")retrofit: Retrofit): AnimeService {
-        return retrofit.create(AnimeService::class.java)
+    fun provideKitsuAnimeService(@Named("Kitsu")retrofit: Retrofit): KitsuAnimeService {
+        return retrofit.create(KitsuAnimeService::class.java)
     }
 
     @Provides
     @Singleton
-    fun provideJikanAnimeService(@Named("Jikan")retrofit: Retrofit): JikanAnimeService {
-        return retrofit.create(JikanAnimeService::class.java)
+    fun provideJikanAnimeService(@Named("Jikan")retrofit: Retrofit): AnimeService {
+        return retrofit.create(AnimeService::class.java)
     }
 }

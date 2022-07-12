@@ -41,8 +41,8 @@ class MyViewModel @Inject constructor(
     private val _reviews = MutableLiveData<List<Review>>()
     val reviews: LiveData<List<Review>> = _reviews
 
-    private val _animeInfo = MutableStateFlow(AnimeInfo())
-    val animeInfo: StateFlow<AnimeInfo> = _animeInfo.asStateFlow()
+    private val _Kitsu_animeInfo = MutableStateFlow(KitsuAnimeInfo())
+    val kitsuAnimeInfo: StateFlow<KitsuAnimeInfo> = _Kitsu_animeInfo.asStateFlow()
 
 //    init {
 //        viewModelScope.launch {

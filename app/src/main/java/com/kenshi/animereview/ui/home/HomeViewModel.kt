@@ -6,16 +6,16 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.kenshi.animereview.data.model.AnimeInfo
-import com.kenshi.animereview.data.model.JikanAnimeInfo
 import com.kenshi.animereview.domain.repository.AnimeRepository
 import com.kenshi.animereview.ui.base.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val animeRepository: AnimeRepository
+    private val animeRepository: AnimeRepository,
 ) : ViewModel() {
     private val firebaseAuth: FirebaseAuth by lazy {
         Firebase.auth
@@ -34,26 +34,44 @@ class HomeViewModel @Inject constructor(
             initialValue = UiState.Loading
         )
 
-    val trendingAnimeList: StateFlow<UiState<List<AnimeInfo>>> = animeRepository.fetchTrendingAnime()
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000L),
-            initialValue = UiState.Loading
-        )
+//    private val _searchIconClickEvent = MutableSharedFlow<Unit>()
+//    val searchIconClickEvent: SharedFlow<Unit> = _searchIconClickEvent.asSharedFlow()
 
-    val genreAnimeList: StateFlow<UiState<List<JikanAnimeInfo>>> = animeRepository.fetchGenreAnime("action")
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000L),
-            initialValue = UiState.Loading
-        )
+//    val trendingAnimeList: StateFlow<UiState<List<KitsuAnimeInfo>>> = animeRepository.fetchTrendingAnime()
+//        .stateIn(
+//            scope = viewModelScope,
+//            started = SharingStarted.WhileSubscribed(5000L),
+//            initialValue = UiState.Loading
+//        )
+//
+//    val genreAnimeList: StateFlow<UiState<List<AnimeInfo>>> = animeRepository.fetchGenreAnime("action")
+//        .stateIn(
+//            scope = viewModelScope,
+//            started = SharingStarted.WhileSubscribed(5000L),
+//            initialValue = UiState.Loading
+//        )
+//
+//    fun searchAnime(title: String): StateFlow<UiState<List<KitsuAnimeInfo>>> = animeRepository.fetchSearchAnime(title)
+//        .stateIn(
+//            scope = viewModelScope,
+//            started = SharingStarted.WhileSubscribed(5000L),
+//            initialValue = UiState.Loading
+//        )
 
-    fun searchAnime(title: String): StateFlow<UiState<List<AnimeInfo>>> = animeRepository.fetchSearchAnime(title)
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000L),
-            initialValue = UiState.Loading
-        )
+//    val trendingAnimeList: StateFlow<UiState<List<AnimeInfo>>> = animeRepository.fetchTrendingAnime()
+//        .stateIn(
+//            scope = viewModelScope,
+//            started = SharingStarted.WhileSubscribed(5000L),
+//            initialValue = UiState.Loading
+//        )
+
+    val genreAnimeList: StateFlow<UiState<List<AnimeInfo>>> =
+        animeRepository.fetchGenreAnime("action")
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5000L),
+                initialValue = UiState.Loading
+            )
 
 //    val mockAnimeList: MutableList<MockAnimeInfo> = mutableListOf(
 //        MockAnimeInfo(
@@ -147,4 +165,21 @@ class HomeViewModel @Inject constructor(
 //            )
 //        )
 //    )
+
+    private val _eventFlow = MutableSharedFlow<Event>()
+    val eventFlow = _eventFlow.asSharedFlow()
+
+    fun searchIconClick() = viewModelScope.launch {
+        event(Event.SearchIconClick)
+    }
+
+    private fun event(event: Event) = viewModelScope.launch {
+        _eventFlow.emit(event)
+    }
+
+
+    sealed class Event {
+        object SearchIconClick : Event()
+        //data class ShowToast(val text: String) : Event()
+    }
 }

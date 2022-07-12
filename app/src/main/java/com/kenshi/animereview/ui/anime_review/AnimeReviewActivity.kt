@@ -7,7 +7,6 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.kenshi.animereview.R
-import com.kenshi.animereview.data.model.AnimeInfo
 import com.kenshi.animereview.databinding.ActivityAnimationReviewBinding
 import com.kenshi.animereview.ui.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint

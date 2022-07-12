@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/navigation_home"
+        android:id="@+id/fragment_home"
         android:icon="@drawable/ic_home_24"
         android:title="@string/title_home" />
 
     <item
-        android:id="@+id/navigation_my"
+        android:id="@+id/fragment_my"
         android:icon="@drawable/ic_rate_review_24"
         android:title="@string/title_review" />
 

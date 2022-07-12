@@ -1,15 +1,5 @@
 package com.kenshi.animereview.data.network.service
 
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.FirebaseFirestoreException
-import com.google.firebase.firestore.QuerySnapshot
-import com.kenshi.animereview.data.model.AnimeInfo
-import com.kenshi.animereview.data.model.Review
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.channels.awaitClose
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.callbackFlow
-import timber.log.Timber
 import javax.inject.Singleton
 
 @Singleton

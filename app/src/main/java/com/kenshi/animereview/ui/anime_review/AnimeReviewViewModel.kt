@@ -9,7 +9,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
-import com.kenshi.animereview.data.model.AnimeInfo
+import com.kenshi.animereview.data.model.KitsuAnimeInfo
 import com.kenshi.animereview.data.model.Review
 import com.kenshi.animereview.data.model.User
 import com.kenshi.animereview.data.model.AnimeReview
@@ -26,11 +26,9 @@ class AnimeReviewViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ): ViewModel() {
 
-    private val REVIEW_PATH = "reviews"
-    private val USER_PATH = "users"
     private var db = FirebaseFirestore.getInstance()
 
-    val animeInfo: AnimeInfo = savedStateHandle.get(AnimeReviewActivity.ANIME_INFO)
+    val kitsuAnimeInfo: KitsuAnimeInfo = savedStateHandle.get(AnimeReviewActivity.ANIME_INFO)
         ?: throw IllegalStateException("There is no value of the animeInfo.")
 
     private val firebaseAuth: FirebaseAuth by lazy {
@@ -72,7 +70,7 @@ class AnimeReviewViewModel @Inject constructor(
         val userRef = db.collection(USER_PATH)
         val animeReviewList = mutableListOf<AnimeReview>()
         val reviewList =
-            reviewRef.whereEqualTo("animeId", animeInfo.id).get().await().toObjects<Review>()
+            reviewRef.whereEqualTo("animeId", kitsuAnimeInfo.id).get().await().toObjects<Review>()
         for(review in reviewList) {
             val userInfo
                     = userRef.whereEqualTo("userId", review.userId).get().await().toObjects<User>()
@@ -94,7 +92,7 @@ class AnimeReviewViewModel @Inject constructor(
 
         val reviewInfo = Review(
             refId,
-            animeInfo.id,
+            kitsuAnimeInfo.id,
             currentUser.uid,
             _rating.value.toString(),
             reviewText.value
@@ -130,5 +128,10 @@ class AnimeReviewViewModel @Inject constructor(
             return true
         }
         return false
+    }
+
+    companion object {
+        private const val REVIEW_PATH = "reviews"
+        private const val USER_PATH = "users"
     }
 }

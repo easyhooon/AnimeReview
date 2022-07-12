@@ -1,15 +1,14 @@
 package com.kenshi.animereview.ui.home
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.kenshi.animereview.R
-import com.kenshi.animereview.data.model.AnimeInfo
-import com.kenshi.animereview.data.model.JikanAnimeInfo
+import com.kenshi.animereview.common.repeatOnStarted
+import com.kenshi.animereview.common.safeNavigate
 import com.kenshi.animereview.databinding.FragmentHomeBinding
-import com.kenshi.animereview.ui.anime_review.AnimeReviewActivity
 import com.kenshi.animereview.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -33,15 +32,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private val recommendAnimeAdapter: RecommendAnimeAdapter by lazy {
         RecommendAnimeAdapter { animeInfo ->
-            navigateToDetail(animeInfo)
+            //navigateToDetail(animeInfo)
         }
     }
 
-    private val trendingAnimeAdapter: RecommendAnimeAdapter by lazy {
-        RecommendAnimeAdapter { animeInfo ->
-            navigateToDetail(animeInfo)
-        }
-    }
+//    private val trendingAnimeAdapter: RecommendAnimeAdapter by lazy {
+//        RecommendAnimeAdapter { animeInfo ->
+//            //navigateToDetail(animeInfo)
+//        }
+//    }
 
     private val genreAnimeAdapter: GenreAnimeAdapter by lazy {
         GenreAnimeAdapter { animeInfo ->
@@ -63,8 +62,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             vm = viewModel
 //            mockAdapter = mockAnimeAdapter
             recommendAdapter = recommendAnimeAdapter
-            trendingAdapter = trendingAnimeAdapter
+//            trendingAdapter = trendingAnimeAdapter
             genreAdapter = genreAnimeAdapter
+        }
+
+//        lifecycleScope.launch {
+//            launch {
+//                viewModel.searchIconClickEvent.collect {
+//                    navigateToSearch()
+//                }
+//            }
+//        }
+        repeatOnStarted {
+            viewModel.eventFlow.collect { event -> handleEvent(event) }
         }
     }
 
@@ -77,12 +87,30 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 //    }
 
     //이러면 똑같은 화면이 데이터만 바껴서 두개가 만들어짐
-    private fun navigateToDetail(animeInfo: AnimeInfo) {
-        startActivity(
-            Intent(requireActivity(), AnimeReviewActivity::class.java).apply {
-                Timber.d("$animeInfo")
-                putExtra(ANIME_INFO, animeInfo)
-            }
-        )
+//    private fun navigateToDetail(kitsuAnimeInfo: KitsuAnimeInfo) {
+//        startActivity(
+//            Intent(requireActivity(), AnimeReviewActivity::class.java).apply {
+//                Timber.d("$kitsuAnimeInfo")
+//                putExtra(ANIME_INFO, kitsuAnimeInfo)
+//            }
+//        )
+//    }
+//    private fun navigateToDetail(animeInfo: AnimeInfo) {
+//        startActivity(
+//            Intent(requireActivity(), AnimeReviewActivity::class.java).apply {
+//                Timber.d("$animeInfo")
+//                putExtra(ANIME_INFO, animeInfo)
+//            }
+//        )
+//    }
+
+    private fun handleEvent(event: HomeViewModel.Event) = when (event) {
+        is HomeViewModel.Event.SearchIconClick -> navigateToSearch()
+    }
+
+    private fun navigateToSearch() {
+        //findNavController().navigate(R.id.action_navigation_home_to_searchFragment)
+        findNavController().safeNavigate(HomeFragmentDirections.actionFragmentHomeToFragmentAnimeSearch())
+        //findNavController().safeNavigate(R.id.fragment_home, R.id.action_fragment_home_to_fragment_anime_search)
     }
 }

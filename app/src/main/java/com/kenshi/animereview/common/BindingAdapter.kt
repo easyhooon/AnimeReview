@@ -1,16 +1,18 @@
 package com.kenshi.animereview.common
 
 import android.view.View
-import android.widget.*
+import android.widget.ImageView
+import android.widget.ProgressBar
+import android.widget.TextView
+import android.widget.Toast
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.chip.Chip
 import com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
 import com.kenshi.animereview.GlideApp
 import com.kenshi.animereview.data.model.AnimeInfo
-import com.kenshi.animereview.data.model.MockAnimeInfo
 import com.kenshi.animereview.data.model.AnimeReview
-import com.kenshi.animereview.data.model.JikanAnimeInfo
+import com.kenshi.animereview.data.model.MockAnimeInfo
 import com.kenshi.animereview.ui.anime_review.AnimeReviewAdapter
 import com.kenshi.animereview.ui.base.UiState
 import com.kenshi.animereview.ui.base.successOrNull
@@ -36,6 +38,12 @@ fun RecyclerView.bindAdapter(adapter: RecyclerView.Adapter<*>) {
 }
 
 @BindingAdapter("animeList")
+//fun RecyclerView.bindAnimeList(animeList: UiState<List<KitsuAnimeInfo>>) {
+//    val boundAdapter = this.adapter
+//    if (boundAdapter is RecommendAnimeAdapter) {
+//        boundAdapter.submitList(animeList.successOrNull())
+//    }
+//}
 fun RecyclerView.bindAnimeList(animeList: UiState<List<AnimeInfo>>) {
     val boundAdapter = this.adapter
     if (boundAdapter is RecommendAnimeAdapter) {
@@ -44,7 +52,7 @@ fun RecyclerView.bindAnimeList(animeList: UiState<List<AnimeInfo>>) {
 }
 
 @BindingAdapter("genreAnimeList")
-fun RecyclerView.bindGenreAnimeList(animeList: UiState<List<JikanAnimeInfo>>) {
+fun RecyclerView.bindGenreAnimeList(animeList: UiState<List<AnimeInfo>>) {
     val boundAdapter = this.adapter
     if (boundAdapter is GenreAnimeAdapter) {
         boundAdapter.submitList(animeList.successOrNull())

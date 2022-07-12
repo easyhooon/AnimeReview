@@ -69,7 +69,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         firebaseAuth = Firebase.auth
-        initViews()
+        initView()
 
         viewModel.userLiveData.observe(this) {
             startActivity(Intent(this, MainActivity::class.java))
@@ -77,7 +77,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         }
     }
 
-    private fun initViews() {
+    private fun initView() {
         binding.btnGoogleLogin.setOnClickListener {
             loginWithGoogle()
         }

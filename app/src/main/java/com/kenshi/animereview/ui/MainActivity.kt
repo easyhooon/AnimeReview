@@ -1,6 +1,7 @@
 package com.kenshi.animereview.ui
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -24,11 +25,19 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         initNavigation()
     }
 
-    private fun initNavigation() {
+    private fun initNavigation() = with(binding) {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        navController = navHostFragment.findNavController()
 
-        binding.bottomNav.setupWithNavController(navController)
+        navController = navHostFragment.findNavController().apply {
+            bottomNav.setupWithNavController(this)
+            addOnDestinationChangedListener { _, destination, _ ->
+                if (destination.id == R.id.fragment_anime_search) {
+                    bottomNav.visibility = View.GONE
+                } else {
+                    bottomNav.visibility = View.VISIBLE
+                }
+            }
+        }
     }
 }

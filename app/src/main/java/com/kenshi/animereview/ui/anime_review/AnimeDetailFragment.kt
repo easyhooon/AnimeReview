@@ -23,7 +23,7 @@ class AnimeDetailFragment: BaseFragment<FragmentAnimeDetailBinding>(R.layout.fra
         //viewModel.setAnimeInfo(viewModel.animeInfo.value)
 
         bind {
-            anime = viewModel.animeInfo
+            anime = viewModel.kitsuAnimeInfo
             reviewAdapter = animeReviewAdapter
             vm = viewModel
         }
@@ -34,7 +34,6 @@ class AnimeDetailFragment: BaseFragment<FragmentAnimeDetailBinding>(R.layout.fra
 
 
     private fun initNavigation() {
-        //툴바 뒤로가기 버튼
         binding.tbAnimeDetail.setOnClickListener{
             if(!findNavController().navigateUp())
                 requireActivity().finish()

@@ -3,6 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+<!--        <variable-->
+<!--            name="anime"-->
+<!--            type="com.kenshi.animereview.data.model.KitsuAnimeInfo" />-->
         <variable
             name="anime"
             type="com.kenshi.animereview.data.model.AnimeInfo" />
@@ -20,7 +23,7 @@
             android:layout_width="160dp"
             android:layout_height="240dp"
             android:scaleType="fitXY"
-            imageUrl="@{anime.attributes.posterImage.medium}" />
+            imageUrl="@{anime.images.webp.largeImageUrl}" />
 
     </com.jackandphantom.carouselrecyclerview.view.ReflectionViewContainer>
 </layout>

@@ -1,17 +1,5 @@
 package com.kenshi.animereview.ui.home
 
-import android.view.LayoutInflater
-import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
-import com.kenshi.animereview.R
-import com.kenshi.animereview.data.model.AnimeInfo
-import com.kenshi.animereview.data.model.JikanAnimeInfo
-import com.kenshi.animereview.databinding.ItemGenreAnimeBinding
-import com.kenshi.animereview.databinding.ItemRecommendAnimeBinding
-
 ////TODO 하나의 어댑터를 통해 viewType 을 나눠 관리
 ////Model을 어쨌든간에 통일해야지 가능한 방법
 //class AnimeAdapter(

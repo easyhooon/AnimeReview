@@ -11,7 +11,7 @@
 
         <variable
             name="anime"
-            type="com.kenshi.animereview.data.model.AnimeInfo" />
+            type="com.kenshi.animereview.data.model.KitsuAnimeInfo" />
 
         <variable
             name="review"

@@ -18,7 +18,7 @@ class RegisterReviewFragment : BaseFragment<FragmentRegisterReviewBinding>(R.lay
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bind {
-            anime = viewModel.animeInfo
+            anime = viewModel.kitsuAnimeInfo
             vm = viewModel
         }
         initNavigation()

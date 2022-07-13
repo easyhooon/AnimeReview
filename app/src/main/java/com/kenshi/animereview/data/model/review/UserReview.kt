@@ -1,6 +1,7 @@
-package com.kenshi.animereview.data.model
+package com.kenshi.animereview.data.model.review
 
 import android.os.Parcelable
+import com.kenshi.animereview.data.model.user.User
 import kotlinx.parcelize.Parcelize
 
 @Parcelize

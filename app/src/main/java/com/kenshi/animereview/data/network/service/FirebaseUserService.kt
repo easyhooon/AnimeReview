@@ -1,8 +1,8 @@
 package com.kenshi.animereview.data.network.service
 
 import com.google.firebase.firestore.FirebaseFirestore
-import com.kenshi.animereview.data.model.User
-import com.kenshi.animereview.data.model.User.Companion.toUser
+import com.kenshi.animereview.data.model.user.User
+import com.kenshi.animereview.data.model.user.User.Companion.toUser
 import kotlinx.coroutines.tasks.await
 import timber.log.Timber
 import javax.inject.Singleton

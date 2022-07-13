@@ -14,7 +14,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.kenshi.animereview.ui.MainActivity
 import com.kenshi.animereview.R
-import com.kenshi.animereview.data.model.User
+import com.kenshi.animereview.data.model.user.User
 import com.kenshi.animereview.databinding.ActivityLoginBinding
 import com.kenshi.animereview.ui.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint

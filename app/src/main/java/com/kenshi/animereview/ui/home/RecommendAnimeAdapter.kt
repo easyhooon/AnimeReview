@@ -7,18 +7,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kenshi.animereview.R
-import com.kenshi.animereview.data.model.AnimeInfo
-import com.kenshi.animereview.data.model.KitsuAnimeInfo
+import com.kenshi.animereview.data.model.kitsu.KitsuAnimeInfo
 import com.kenshi.animereview.databinding.ItemRecommendAnimeBinding
 
-//class RecommendAnimeAdapter(
-//    private val whenItemClicked: (KitsuAnimeInfo) -> Unit
-//) : ListAdapter<KitsuAnimeInfo, RecommendAnimeAdapter.RecommendAnimeViewHolder>(diffCallback) {
-
 class RecommendAnimeAdapter(
-    private val whenItemClicked: (AnimeInfo) -> Unit,
-) : ListAdapter<AnimeInfo, RecommendAnimeAdapter.RecommendAnimeViewHolder>(diffCallback) {
-
+    private val whenItemClicked: (KitsuAnimeInfo) -> Unit,
+) : ListAdapter<KitsuAnimeInfo, RecommendAnimeAdapter.RecommendAnimeViewHolder>(diffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecommendAnimeViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -46,13 +40,7 @@ class RecommendAnimeAdapter(
         private val binding: ItemRecommendAnimeBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
 
-//        fun bind(item: KitsuAnimeInfo) {
-//            binding.apply {
-//                anime = item
-//                executePendingBindings()
-//            }
-//        }
-        fun bind(item: AnimeInfo) {
+        fun bind(item: KitsuAnimeInfo) {
             binding.apply {
                 anime = item
                 executePendingBindings()
@@ -60,32 +48,17 @@ class RecommendAnimeAdapter(
         }
     }
 
-    //    companion object {
-//        private val diffCallback = object : DiffUtil.ItemCallback<KitsuAnimeInfo>() {
-//            override fun areItemsTheSame(
-//                oldItem: KitsuAnimeInfo,
-//                newItem: KitsuAnimeInfo,
-//            ): Boolean =
-//                oldItem.id == newItem.id
-//
-//            override fun areContentsTheSame(
-//                oldItem: KitsuAnimeInfo,
-//                newItem: KitsuAnimeInfo,
-//            ): Boolean =
-//                oldItem == newItem
-//        }
-//    }
     companion object {
-        private val diffCallback = object : DiffUtil.ItemCallback<AnimeInfo>() {
+        private val diffCallback = object : DiffUtil.ItemCallback<KitsuAnimeInfo>() {
             override fun areItemsTheSame(
-                oldItem: AnimeInfo,
-                newItem: AnimeInfo,
+                oldItem: KitsuAnimeInfo,
+                newItem: KitsuAnimeInfo,
             ): Boolean =
                 oldItem.id == newItem.id
 
             override fun areContentsTheSame(
-                oldItem: AnimeInfo,
-                newItem: AnimeInfo,
+                oldItem: KitsuAnimeInfo,
+                newItem: KitsuAnimeInfo,
             ): Boolean =
                 oldItem == newItem
         }

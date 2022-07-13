@@ -1,4 +1,4 @@
-package com.kenshi.animereview.data.model
+package com.kenshi.animereview.data.model.user
 
 import android.os.Parcelable
 import com.google.firebase.firestore.DocumentSnapshot

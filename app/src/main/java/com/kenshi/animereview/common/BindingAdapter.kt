@@ -10,16 +10,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.chip.Chip
 import com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
 import com.kenshi.animereview.GlideApp
-import com.kenshi.animereview.data.model.AnimeInfo
-import com.kenshi.animereview.data.model.AnimeReview
 import com.kenshi.animereview.data.model.MockAnimeInfo
+import com.kenshi.animereview.data.model.jikan.AnimeInfo
+import com.kenshi.animereview.data.model.kitsu.KitsuAnimeInfo
+import com.kenshi.animereview.data.model.review.AnimeReview
 import com.kenshi.animereview.ui.anime_review.AnimeReviewAdapter
 import com.kenshi.animereview.ui.base.UiState
 import com.kenshi.animereview.ui.base.successOrNull
 import com.kenshi.animereview.ui.home.GenreAnimeAdapter
-import com.kenshi.animereview.ui.home.MockAnimeAdapter
 import com.kenshi.animereview.ui.home.RecommendAnimeAdapter
 import com.kenshi.animereview.ui.my.MyReviewAdapter
+import timber.log.Timber
 import java.text.DecimalFormat
 
 
@@ -37,17 +38,23 @@ fun RecyclerView.bindAdapter(adapter: RecyclerView.Adapter<*>) {
     this.adapter = adapter
 }
 
+@BindingAdapter("animeAdapter")
+fun CarouselRecyclerview.bindAnimeAdapter(adapter: RecyclerView.Adapter<*>) {
+    this.adapter = adapter
+
+    setInfinite(true)
+    setAlpha(true)
+//    setFlat(false)
+    setIntervalRatio(0.5f)
+    isNestedScrollingEnabled = false
+}
+
 @BindingAdapter("animeList")
-//fun RecyclerView.bindAnimeList(animeList: UiState<List<KitsuAnimeInfo>>) {
-//    val boundAdapter = this.adapter
-//    if (boundAdapter is RecommendAnimeAdapter) {
-//        boundAdapter.submitList(animeList.successOrNull())
-//    }
-//}
-fun RecyclerView.bindAnimeList(animeList: UiState<List<AnimeInfo>>) {
+fun RecyclerView.bindAnimeList(animeList: UiState<List<KitsuAnimeInfo>>) {
     val boundAdapter = this.adapter
     if (boundAdapter is RecommendAnimeAdapter) {
         boundAdapter.submitList(animeList.successOrNull())
+        Timber.d("RecommendAnimeAdapter: ${animeList.successOrNull()}")
     }
 }
 
@@ -56,6 +63,7 @@ fun RecyclerView.bindGenreAnimeList(animeList: UiState<List<AnimeInfo>>) {
     val boundAdapter = this.adapter
     if (boundAdapter is GenreAnimeAdapter) {
         boundAdapter.submitList(animeList.successOrNull())
+        Timber.d("GenreAnimeAdapter: ${animeList.successOrNull()}")
     }
 }
 
@@ -81,26 +89,6 @@ fun RecyclerView.bindMyReviewList(animeReviewList: UiState<List<AnimeReview>>) {
     if (boundAdapter is MyReviewAdapter) {
         boundAdapter.submitList(animeReviewList.successOrNull())
     }
-}
-
-
-@BindingAdapter("mockAnimeList")
-fun RecyclerView.bindMockAnimeList(animeList: MutableList<MockAnimeInfo>) {
-    val boundAdapter = this.adapter
-    if (boundAdapter is MockAnimeAdapter) {
-        boundAdapter.submitList(animeList)
-    }
-}
-
-@BindingAdapter("animeAdapter")
-fun CarouselRecyclerview.bindAnimeAdapter(adapter: RecyclerView.Adapter<*>) {
-    this.adapter = adapter
-
-    setInfinite(true)
-    setAlpha(true)
-//    setFlat(false)
-    setIntervalRatio(0.5f)
-    isNestedScrollingEnabled = false
 }
 
 @BindingAdapter("show")

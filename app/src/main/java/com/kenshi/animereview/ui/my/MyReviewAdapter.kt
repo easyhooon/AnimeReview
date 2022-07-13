@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kenshi.animereview.R
-import com.kenshi.animereview.data.model.AnimeReview
+import com.kenshi.animereview.data.model.review.AnimeReview
 import com.kenshi.animereview.databinding.ItemMyReviewBinding
 
 class MyReviewAdapter: ListAdapter<AnimeReview, MyReviewAdapter.ReviewViewHolder>(diffCallback) {

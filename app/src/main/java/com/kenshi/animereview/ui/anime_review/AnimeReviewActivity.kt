@@ -28,11 +28,4 @@ class AnimeReviewActivity : BaseActivity<ActivityAnimationReviewBinding>(R.layou
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.findNavController()
     }
-
-
-
-    companion object {
-        const val ANIME_INFO = "animeInfo"
-    }
-
 }

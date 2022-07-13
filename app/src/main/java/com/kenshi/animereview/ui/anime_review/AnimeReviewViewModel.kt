@@ -1,5 +1,6 @@
 package com.kenshi.animereview.ui.anime_review
 
+import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.lifecycle.*
@@ -10,11 +11,14 @@ import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
 import com.kenshi.animereview.common.Event
 import com.kenshi.animereview.common.hideKeyboard
-import com.kenshi.animereview.data.model.AnimeReview
-import com.kenshi.animereview.data.model.KitsuAnimeInfo
-import com.kenshi.animereview.data.model.Review
-import com.kenshi.animereview.data.model.User
+import com.kenshi.animereview.data.model.review.AnimeReview
+import com.kenshi.animereview.data.model.kitsu.KitsuAnimeInfo
+import com.kenshi.animereview.data.model.review.Review
+import com.kenshi.animereview.data.model.user.User
 import com.kenshi.animereview.ui.base.UiState
+import com.kenshi.animereview.util.Constants.ANIME_INFO
+import com.kenshi.animereview.util.Constants.REVIEW_PATH
+import com.kenshi.animereview.util.Constants.USER_PATH
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.tasks.await
 import timber.log.Timber
@@ -26,7 +30,7 @@ class AnimeReviewViewModel @Inject constructor(
 
     private var db = FirebaseFirestore.getInstance()
 
-    val kitsuAnimeInfo: KitsuAnimeInfo = savedStateHandle.get(AnimeReviewActivity.ANIME_INFO)
+    val kitsuAnimeInfo: KitsuAnimeInfo = savedStateHandle.get(ANIME_INFO)
         ?: throw IllegalStateException("There is no value of the animeInfo.")
 
     private val firebaseAuth: FirebaseAuth by lazy {
@@ -120,7 +124,7 @@ class AnimeReviewViewModel @Inject constructor(
     }
 
     //bindingAdapter 로 해결한것은 아니지만 우선 기능 구현
-    fun onDoneClicked(view: View, actionId: Int): Boolean {
+    fun onDoneClicked(view: View, actionId: Int, keyEvent: KeyEvent): Boolean {
         if(actionId == EditorInfo.IME_ACTION_DONE) {
             view.hideKeyboard()
             return true
@@ -144,8 +148,4 @@ class AnimeReviewViewModel @Inject constructor(
 //        object BackIconClick : Event()
 //    }
 //
-    companion object {
-        private const val REVIEW_PATH = "reviews"
-        private const val USER_PATH = "users"
-    }
 }

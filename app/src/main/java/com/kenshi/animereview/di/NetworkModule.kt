@@ -9,6 +9,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
@@ -31,7 +32,7 @@ object NetworkModule {
 //    @Singleton
 //    fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
 //        return HttpLoggingInterceptor().apply {
-//            if(BuildConfig.DEBUG) {
+//            if (BuildConfig.DEBUG) {
 //                level = HttpLoggingInterceptor.Level.BODY
 //            }
 //        }
@@ -50,6 +51,16 @@ object NetworkModule {
 //    @Provides
 //    @Singleton
 //    fun provideOkHttpClient(interceptor: HttpLoggingInterceptor): OkHttpClient {
+//        return OkHttpClient.Builder().apply {
+//            addInterceptor(interceptor)
+//            connectTimeout(timeoutConnect, TimeUnit.SECONDS)
+//            readTimeout(timeoutRead, TimeUnit.SECONDS)
+//        }.build()
+//    }
+
+//    @Provides
+//    @Singleton
+//    fun provideOkHttpClient(interceptor: HttpLoggingInterceptor): OkHttpClient {
 //        return OkHttpClient.Builder()
 //            .addInterceptor(interceptor)
 //            .build()
@@ -58,8 +69,8 @@ object NetworkModule {
     @Singleton
     @Named("Kitsu")
     fun provideKitsuRetrofit(
-        okHttpClient: OkHttpClient
-    ):  Retrofit {
+        okHttpClient: OkHttpClient,
+    ): Retrofit {
         return Retrofit.Builder().apply {
             baseUrl(BuildConfig.KITSU_ANIME_API_BASE_URL)
             client(okHttpClient)
@@ -71,8 +82,8 @@ object NetworkModule {
     @Singleton
     @Named("Jikan")
     fun provideJikanRetrofit(
-        okHttpClient: OkHttpClient
-    ):  Retrofit {
+        okHttpClient: OkHttpClient,
+    ): Retrofit {
         return Retrofit.Builder().apply {
             baseUrl(BuildConfig.JIKAN_ANIME_API_BASE_URL)
             client(okHttpClient)
@@ -82,13 +93,13 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideKitsuAnimeService(@Named("Kitsu")retrofit: Retrofit): KitsuAnimeService {
+    fun provideKitsuAnimeService(@Named("Kitsu") retrofit: Retrofit): KitsuAnimeService {
         return retrofit.create(KitsuAnimeService::class.java)
     }
 
     @Provides
     @Singleton
-    fun provideJikanAnimeService(@Named("Jikan")retrofit: Retrofit): AnimeService {
+    fun provideJikanAnimeService(@Named("Jikan") retrofit: Retrofit): AnimeService {
         return retrofit.create(AnimeService::class.java)
     }
 }

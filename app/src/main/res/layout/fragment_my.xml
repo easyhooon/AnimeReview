@@ -7,7 +7,7 @@
 
         <variable
             name="user"
-            type="com.kenshi.animereview.data.model.User" />
+            type="com.kenshi.animereview.data.model.user.User" />
 
         <variable
             name="vm"

@@ -1,13 +1,13 @@
-package com.kenshi.animereview.data.model
+package com.kenshi.animereview.data.model.review
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class AnimeReview(
+data class Review(
     val reviewId: String? = null,
     val animeId: String? = null,
-    val user: User? = null,
+    val userId: String? = null,
     var rating: String? = null,
     val reviewText: String? = null
 ) : Parcelable

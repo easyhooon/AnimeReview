@@ -6,7 +6,7 @@
         <item name="colorPrimaryVariant">@color/anime_gradient_purple</item>
         <item name="colorOnPrimary">@color/anime_black_01</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/anime_pink_01</item>
+        <item name="colorSecondary">@color/anime_grey_01</item>
         <item name="colorSecondaryVariant">@color/anime_pink_02</item>
         <item name="colorOnSecondary">@color/anime_black_01</item>
         <!-- Status bar color. -->

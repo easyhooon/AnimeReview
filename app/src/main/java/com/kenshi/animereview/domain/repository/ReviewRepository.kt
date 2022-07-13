@@ -1,6 +1,6 @@
 package com.kenshi.animereview.domain.repository
 
-import com.kenshi.animereview.data.model.Review
+import com.kenshi.animereview.data.model.review.Review
 
 interface ReviewRepository {
 

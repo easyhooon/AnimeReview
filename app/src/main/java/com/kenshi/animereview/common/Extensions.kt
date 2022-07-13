@@ -3,9 +3,13 @@ package com.kenshi.animereview.common
 import android.content.Context
 import android.content.res.Resources
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.TypedValue
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
+import androidx.annotation.CheckResult
 import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
@@ -15,19 +19,27 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.NavDirections
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
 //ViewExt
 fun View.showKeyboard(requestFocus: Boolean = false) {
     if (requestFocus) this.requestFocus()
-    (this.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
+    (this.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).showSoftInput(
+        this,
+        InputMethodManager.SHOW_IMPLICIT)
 }
 
 fun View.hideKeyboard(clearFocus: Boolean = false) {
     if (clearFocus) this.clearFocus()
-    (this.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(this.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+    (this.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(
+        this.windowToken,
+        InputMethodManager.HIDE_NOT_ALWAYS)
 }
 
 fun View.visible() {
@@ -52,7 +64,7 @@ fun Context.dpToPx(dp: Float): Int =
 
 inline fun Fragment.launchAndRepeatWithViewLifecycle(
     minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
-    crossinline block: suspend CoroutineScope.() -> Unit
+    crossinline block: suspend CoroutineScope.() -> Unit,
 ) {
     viewLifecycleOwner.lifecycleScope.launch {
         viewLifecycleOwner.lifecycle.repeatOnLifecycle(minActiveState) {
@@ -106,4 +118,27 @@ fun NavController.safeNavigate(direction: NavDirections) {
 //        navigate(id, args)
 //    }
 //}
+
+
+fun EditText.textChangesToFlow(): Flow<CharSequence?> {
+    return callbackFlow {
+        val listener = object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) = Unit
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) =
+                Unit
+
+            override fun onTextChanged(text: CharSequence?, start: Int, before: Int, count: Int) {
+                //offer(text)
+                // 값 내보내기
+                trySend(text)
+            }
+        }
+        addTextChangedListener(listener)
+        // 콜백이 사라질때 실행, 리스너 제거
+        awaitClose { removeTextChangedListener(listener) }
+    }.onStart {
+        // event 방출
+        emit(text)
+    }
+}
 

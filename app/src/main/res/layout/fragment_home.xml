@@ -15,17 +15,13 @@
             name="recommend_adapter"
             type="com.kenshi.animereview.ui.home.RecommendAnimeAdapter" />
 
-<!--        <variable-->
-<!--            name="trending_adapter"-->
-<!--            type="com.kenshi.animereview.ui.home.RecommendAnimeAdapter" />-->
+        <variable
+            name="trending_adapter"
+            type="com.kenshi.animereview.ui.home.RecommendAnimeAdapter" />
 
         <variable
             name="genre_adapter"
             type="com.kenshi.animereview.ui.home.GenreAnimeAdapter" />
-
-<!--        <variable-->
-<!--            name="mock_adapter"-->
-<!--            type="com.kenshi.animereview.ui.home.MockAnimeAdapter" />-->
 
     </data>
 
@@ -52,11 +48,11 @@
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:onClick="@{()-> vm.searchIconClick()}"
                         android:paddingStart="16dp"
                         android:paddingTop="32dp"
                         android:paddingEnd="16dp"
                         android:paddingBottom="12dp"
-                        android:onClick="@{()-> vm.searchIconClick()}"
                         android:src="@drawable/ic_search_36"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -85,23 +81,11 @@
                     android:paddingStart="16dp"
                     android:paddingTop="24dp"
                     android:paddingEnd="16dp"
-                    app:layout_constraintTop_toTopOf="parent"
                     android:text="@{@string/user_recommend_animation(vm.userName)}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     tools:text="지훈님을 위한 추천 애니메이션" />
-
-                <!--                <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview-->
-                <!--                    android:id="@+id/rv_recommend_anime"-->
-                <!--                    android:layout_width="0dp"-->
-                <!--                    android:layout_height="360dp"-->
-                <!--                    android:layout_marginHorizontal="12dp"-->
-                <!--                    android:layout_marginTop="16dp"-->
-                <!--                    app:animeAdapter="@{mock_adapter}"-->
-                <!--                    app:mockAnimeList="@{vm.mockAnimeList}"-->
-                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
-                <!--                    app:layout_constraintStart_toStartOf="parent"-->
-                <!--                    app:layout_constraintTop_toBottomOf="@id/tv_home_title_recommend" />-->
 
                 <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
                     android:id="@+id/rv_recommend_anime"
@@ -125,41 +109,41 @@
                     app:layout_constraintTop_toTopOf="@id/rv_recommend_anime"
                     app:show="@{vm.animeListById}" />
 
-<!--                <TextView-->
-<!--                    android:id="@+id/tv_home_title_trending"-->
-<!--                    style="@style/TextHeadline5.Black02.Bold"-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:maxLines="2"-->
-<!--                    android:paddingStart="16dp"-->
-<!--                    android:paddingTop="24dp"-->
-<!--                    android:paddingEnd="16dp"-->
-<!--                    android:text="@string/trending_animation"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@id/rv_recommend_anime" />-->
+                <TextView
+                    android:id="@+id/tv_home_title_trending"
+                    style="@style/TextHeadline5.Black02.Bold"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="2"
+                    android:paddingStart="16dp"
+                    android:paddingTop="24dp"
+                    android:paddingEnd="16dp"
+                    android:text="@string/trending_animation"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rv_recommend_anime" />
 
-<!--                <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview-->
-<!--                    android:id="@+id/rv_trending_anime"-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="360dp"-->
-<!--                    android:layout_marginHorizontal="12dp"-->
-<!--                    android:layout_marginTop="16dp"-->
-<!--                    app:animeAdapter="@{trending_adapter}"-->
-<!--                    app:animeList="@{vm.trendingAnimeList}"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@id/tv_home_title_trending" />-->
+                <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
+                    android:id="@+id/rv_trending_anime"
+                    android:layout_width="0dp"
+                    android:layout_height="360dp"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginTop="16dp"
+                    app:animeAdapter="@{trending_adapter}"
+                    app:animeList="@{vm.trendingAnimeList}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_home_title_trending" />
 
-<!--                <ProgressBar-->
-<!--                    android:id="@+id/trending_loading_bar"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    app:layout_constraintBottom_toBottomOf="@id/rv_trending_anime"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="@id/rv_trending_anime"-->
-<!--                    app:show="@{vm.trendingAnimeList}" />-->
+                <ProgressBar
+                    android:id="@+id/trending_loading_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@id/rv_trending_anime"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/rv_trending_anime"
+                    app:show="@{vm.trendingAnimeList}" />
 
                 <TextView
                     android:id="@+id/tv_home_title_action"
@@ -173,7 +157,7 @@
                     android:text="@string/genre_animation_action"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/rv_recommend_anime" />
+                    app:layout_constraintTop_toBottomOf="@id/rv_trending_anime" />
 
                 <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
                     android:id="@+id/rv_genre_anime"

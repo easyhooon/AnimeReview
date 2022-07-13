@@ -1,6 +1,6 @@
 package com.kenshi.animereview.domain.repository
 
-import com.kenshi.animereview.data.model.User
+import com.kenshi.animereview.data.model.user.User
 import com.kenshi.animereview.ui.base.UiState
 import kotlinx.coroutines.flow.Flow
 

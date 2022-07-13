@@ -1,5 +1,6 @@
 package com.kenshi.animereview.ui.home
 
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -7,7 +8,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kenshi.animereview.R
-import com.kenshi.animereview.data.model.AnimeInfo
+import com.kenshi.animereview.data.model.jikan.AnimeInfo
+import com.kenshi.animereview.data.model.jikan.AnimeList
 import com.kenshi.animereview.databinding.ItemGenreAnimeBinding
 
 class GenreAnimeAdapter(

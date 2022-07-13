@@ -1,10 +1,9 @@
 package com.kenshi.animereview.data.remote
 
-import com.kenshi.animereview.data.model.User
+import com.kenshi.animereview.data.model.user.User
 import com.kenshi.animereview.data.network.service.FirebaseReviewService
 import com.kenshi.animereview.data.network.service.FirebaseUserService
 import com.kenshi.animereview.domain.repository.UserRepository
-import com.kenshi.animereview.exceptions.EmptyBodyException
 import com.kenshi.animereview.ui.base.UiState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -20,7 +19,6 @@ class UserRepositoryImpl @Inject constructor(
         userService.setUserInfo(userId, userInfo)
     }
 
-    //TODO 예외처리
     override fun fetchUserInfo(userId: String): Flow<UiState<User>> = flow<UiState<User>> {
         val userInfo = userService.getUserInfo(userId)
         Timber.tag("userInfo").d("$userInfo")

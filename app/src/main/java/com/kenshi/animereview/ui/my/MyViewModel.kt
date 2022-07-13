@@ -10,9 +10,14 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
-import com.kenshi.animereview.data.model.*
+import com.kenshi.animereview.data.model.kitsu.KitsuAnimeInfo
+import com.kenshi.animereview.data.model.review.AnimeReview
+import com.kenshi.animereview.data.model.review.Review
+import com.kenshi.animereview.data.model.user.User
 import com.kenshi.animereview.domain.repository.AnimeRepository
 import com.kenshi.animereview.ui.base.UiState
+import com.kenshi.animereview.util.Constants.REVIEW_PATH
+import com.kenshi.animereview.util.Constants.USER_PATH
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.tasks.await
@@ -27,8 +32,6 @@ class MyViewModel @Inject constructor(
 //    private val reviewRepository: ReviewRepository
 ) : ViewModel() {
 
-    private val REVIEW_PATH = "reviews"
-    private val USER_PATH = "users"
     private var db = FirebaseFirestore.getInstance()
 
     private val firebaseAuth: FirebaseAuth by lazy {
@@ -41,8 +44,8 @@ class MyViewModel @Inject constructor(
     private val _reviews = MutableLiveData<List<Review>>()
     val reviews: LiveData<List<Review>> = _reviews
 
-    private val _Kitsu_animeInfo = MutableStateFlow(KitsuAnimeInfo())
-    val kitsuAnimeInfo: StateFlow<KitsuAnimeInfo> = _Kitsu_animeInfo.asStateFlow()
+    private val _kitsuAnimeInfo = MutableStateFlow(KitsuAnimeInfo())
+    val kitsuAnimeInfo: StateFlow<KitsuAnimeInfo> = _kitsuAnimeInfo.asStateFlow()
 
 //    init {
 //        viewModelScope.launch {
@@ -75,6 +78,7 @@ class MyViewModel @Inject constructor(
         )
 
     //전체 리뷰 중에 로그인한 유저가 작성한 리뷰 가져오기
+    //TODO AnimeTitle, Image 가져오기
     private fun fetchReviewList(): Flow<UiState<List<AnimeReview>>> =
         flow<UiState<List<AnimeReview>>> {
             emit(UiState.Loading)
@@ -83,20 +87,11 @@ class MyViewModel @Inject constructor(
             val animeReviewList = mutableListOf<AnimeReview>()
             val reviewList =
                 reviewRef.whereEqualTo("userId", currentUser.uid).get().await().toObjects<Review>()
+
             for (review in reviewList) {
                 val userInfo =
                     userRef.whereEqualTo("userId", review.userId).get().await().toObjects<User>()
-//TODO AnimeTitle 가져오기
-//                val anime =
-//                   animeRepository.fetchAnimeById(review.animeId!!)
-//                    animeReviewList.add(UserReview(
-//                        animeTitle = anime,
-//                        reviewId = review.reviewId,
-//                        animeId = review.animeId,
-//                        user = userInfo[0],
-//                        rating = review.rating,
-//                        reviewText = review.reviewText
-//                    ))
+
                 animeReviewList.add(AnimeReview(
                     reviewId = review.reviewId,
                     animeId = review.animeId,

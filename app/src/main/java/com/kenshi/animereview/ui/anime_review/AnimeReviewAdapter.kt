@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kenshi.animereview.R
-import com.kenshi.animereview.data.model.AnimeReview
+import com.kenshi.animereview.data.model.review.AnimeReview
 import com.kenshi.animereview.databinding.ItemAnimeReviewBinding
 
 class AnimeReviewAdapter: ListAdapter<AnimeReview, AnimeReviewAdapter.ReviewViewHolder>(diffCallback) {
@@ -40,7 +40,7 @@ class AnimeReviewAdapter: ListAdapter<AnimeReview, AnimeReviewAdapter.ReviewView
             override fun areItemsTheSame(oldItem: AnimeReview, newItem: AnimeReview): Boolean =
                 oldItem.reviewId == newItem.reviewId
 
-            override fun areContentsTheSame(oldItem:AnimeReview, newItem: AnimeReview): Boolean =
+            override fun areContentsTheSame(oldItem: AnimeReview, newItem: AnimeReview): Boolean =
                 oldItem == newItem
         }
     }

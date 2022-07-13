@@ -12,11 +12,11 @@
 
         <variable
             name="anime"
-            type="com.kenshi.animereview.data.model.KitsuAnimeInfo" />
+            type="com.kenshi.animereview.data.model.kitsu.KitsuAnimeInfo" />
 
         <variable
             name="anime_review"
-            type="com.kenshi.animereview.data.model.Review" />
+            type="com.kenshi.animereview.data.model.review.Review" />
 
         <variable
             name="vm"

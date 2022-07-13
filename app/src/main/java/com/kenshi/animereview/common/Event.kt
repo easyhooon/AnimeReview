@@ -2,6 +2,9 @@ package com.kenshi.animereview.common
 
 import androidx.lifecycle.Observer
 
+
+//TODO SharedFlow + sealed class + lifecycle 로 migration
+
 //architecture-samples/app/src/main/java/com/example/android/architecture/blueprints/todoapp/Event.kt
 
 //데이터 타입은 무엇이든 가능하게 제네릭

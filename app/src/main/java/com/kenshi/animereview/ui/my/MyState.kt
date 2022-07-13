@@ -2,7 +2,7 @@ package com.kenshi.animereview.ui.my
 
 import android.net.Uri
 import androidx.annotation.StringRes
-import com.kenshi.animereview.data.model.Review
+import com.kenshi.animereview.data.model.review.Review
 
 //TODO Login State 관리
 sealed class MyState {

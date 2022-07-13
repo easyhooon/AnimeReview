@@ -1,6 +1,6 @@
 package com.kenshi.animereview.data.remote
 
-import com.kenshi.animereview.data.model.Review
+import com.kenshi.animereview.data.model.review.Review
 import com.kenshi.animereview.domain.repository.ReviewRepository
 import javax.inject.Inject
 

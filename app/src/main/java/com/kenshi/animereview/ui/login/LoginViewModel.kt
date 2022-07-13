@@ -7,13 +7,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.firestore.FirebaseFirestore
 import com.kenshi.animereview.data.PreferenceManager
-import com.kenshi.animereview.data.model.User
-import com.kenshi.animereview.data.network.service.FirebaseUserService
-import com.kenshi.animereview.domain.repository.UserRepository
+import com.kenshi.animereview.data.model.user.User
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 import javax.inject.Inject

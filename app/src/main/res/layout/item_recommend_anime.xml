@@ -3,12 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-<!--        <variable-->
-<!--            name="anime"-->
-<!--            type="com.kenshi.animereview.data.model.KitsuAnimeInfo" />-->
         <variable
             name="anime"
-            type="com.kenshi.animereview.data.model.AnimeInfo" />
+            type="com.kenshi.animereview.data.model.kitsu.KitsuAnimeInfo" />
+
+<!--        <variable-->
+<!--            name="anime"-->
+<!--            type="com.kenshi.animereview.data.model.Jikan.AnimeInfo" />-->
+
     </data>
 
 
@@ -19,11 +21,17 @@
         android:orientation="vertical"
         app:reflect_gap="0dp">
 
+<!--        <androidx.appcompat.widget.AppCompatImageView-->
+<!--            android:layout_width="160dp"-->
+<!--            android:layout_height="240dp"-->
+<!--            android:scaleType="fitXY"-->
+<!--            imageUrl="@{anime.images.webp.largeImageUrl}" />-->
+
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="160dp"
             android:layout_height="240dp"
             android:scaleType="fitXY"
-            imageUrl="@{anime.images.webp.largeImageUrl}" />
+            imageUrl="@{anime.attributes.posterImage.large}" />
 
     </com.jackandphantom.carouselrecyclerview.view.ReflectionViewContainer>
 </layout>
